@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CountryDetail.swift
 //  CovidCases
 //
 //  Created by Imthath M on 03/04/20.
@@ -8,14 +8,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CountryDetail: View {
+    let country: Country
+    
     var body: some View {
-        CountryList()
+        Text(country.name)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CountryDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CountryDetail(country: Model.country)
     }
 }
