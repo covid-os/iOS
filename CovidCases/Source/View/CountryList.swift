@@ -36,9 +36,12 @@ struct CountryList: View {
             set: { self.searchText = $0; self.filterCountries() }
         )
         
-        return VStack {
-            SearchField(searchText: binding)
-            listView
+        return ZStack {
+            Color(UIColor.systemGroupedBackground)
+            VStack {
+                SearchField(searchText: binding).padding(.bottom, .small)
+                listView
+            }
         }
     }
     
@@ -217,12 +220,11 @@ public struct SearchField: View {
     }
     
     public var body: some View {
-        // Search view
         HStack {
             HStack {
                 Image(systemName: "magnifyingglass")
 
-                TextField("search", text: $searchText, onEditingChanged: { isEditing in
+                TextField("Search", text: $searchText, onEditingChanged: { isEditing in
                     self.showCancelButton = true
                 }, onCommit: {
                     print("onCommit")
@@ -234,10 +236,10 @@ public struct SearchField: View {
                     Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
                 }
             }
-            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+            .padding(EdgeInsets(top: .small, leading: .small * 0.75, bottom: .small, trailing: .small * 0.75))
             .foregroundColor(.secondary)
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(10.0)
+            .background(Color(.secondarySystemGroupedBackground))
+            .cornerRadius(.small)
 
             if showCancelButton  {
                 Button("Cancel") {
