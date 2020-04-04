@@ -11,41 +11,50 @@ import SwiftyUserInterface
 import MINetworkKit
 
 struct CountryList: View {
-    @State var countries: [Country] = []
-    @State var searchText: String = ""
-    @State var sortedBy: CountrySort = .total
+    @State private var displayedCountries: [Country] = []
+    @State private var storedCountries: [Country] = []
+    @State private var searchText: String = ""
+    @State private var sortedBy: CountrySort = .total
     
     var getCountries = GetObject<CountryData>()
     
     var body: some View {
         NavigationView {
+            viewStack
+                .onAppear(perform: updateCountries)
+                .navigationBarTitle("COVID-19 cases", displayMode: .inline)
+                .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill", andAction: updateCountries))
+//                .introspectNavigationController { navigationController in
+//                    self.setColors(to: navigationController.navigationBar)
+//            }
+        }
+    }
+    
+    var viewStack: some View {
+        let binding = Binding<String>(
+            get: { self.searchText },
+            set: { self.searchText = $0; self.filterCountries() }
+        )
+        
+        return VStack {
+            SearchField(searchText: binding)
             listView
-            .onAppear(perform: updateCountries)
-            .navigationBarTitle("COVID-19 cases")
-            .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill", andAction: updateCountries))
         }
     }
     
     private var listView: some View {
         List {
-//            SearchView(searchText: $searchText)
             section
-        }.listRowInsets(EdgeInsets(top: .small, leading: .medium, bottom: .small, trailing: .small))
+        }
+        .listRowInsets(EdgeInsets(top: .small, leading: .small, bottom: .small, trailing: .zero))
         .introspectTableView { tableView in
-            if self.countries.isEmpty {
-                let label = UILabel()
-                label.text = "Loading..."
-                tableView.tableFooterView = label
-            } else {
-                tableView.tableFooterView = UIView()
-            }
-            
+            tableView.tableFooterView = UIView()
         }
     }
     
-    private var section: some View {
+    fileprivate var section: some View {
         Section(header: sectionHeader) {
-            ForEach(countries, id: \.slug) { country in
+            ForEach(displayedCountries, id: \.slug) { country in
                 NavigationLink(destination: CountryDetail(country: country)) {
                     CountryRow(country: country)
                 }
@@ -53,17 +62,17 @@ struct CountryList: View {
         }
     }
     
-    private var sectionHeader: some View {
+    fileprivate var sectionHeader: some View {
         GeometryReader { geometry in
             HStack(spacing: .zero) {
-                self.sortButton(for: .name, title: "Country")
-                    .frame(width: geometry.width * 0.37)
-                self.sortButton(for: .total, title: "Total")
+                self.sortButton(for: .name, title: "COUNTRY")
+                    .frame(width: geometry.width * 0.4)
+                self.sortButton(for: .total, title: "TOTAL")
                     .frame(width: geometry.width * 0.2)
-                self.sortButton(for: .active, title: "Active")
+                self.sortButton(for: .active, title: "ACTIVE")
                     .frame(width: geometry.width * 0.2)
-                self.sortButton(for: .recovered, title: "Recovered")
-                    .frame(width: geometry.width * 0.23)
+                self.sortButton(for: .recovered, title: "RECOVERED")
+                    .frame(width: geometry.width * 0.2, height: .averageTouchSize)
             }
             .frame(height: .averageTouchSize * 1.5)
         }
@@ -72,32 +81,48 @@ struct CountryList: View {
     func sortButton(for sorter: CountrySort, title: String) -> some View {
         Button(action: {
             self.sortedBy = sorter
-            self.countries.sort(by: sorter)
+            self.displayedCountries.sort(by: sorter)
         }, label: {
-            HStack {
-                Text(title)
-                if sortedBy == sorter {
-                    Image(systemName: "arrowtriangle.down.fill")
-                }
-            }
-            .font(.footnote)
-            .foregroundColor(.primary)
+            Text(title)
+                .font(.custom("Gill Sans", size: .small * 1.4))
+                .foregroundColor(sortedBy == sorter ? .blue : .primary)
         })
         
     }
     
+//    func setColors(to navigationBar: UINavigationBar) {
+//        let appearance = UINavigationBarAppearance()
+//        appearance.shadowColor = .clear
+//        appearance.backgroundColor = .systemBackground
+//        navigationBar.standardAppearance = appearance
+//        navigationBar.compactAppearance = appearance
+//        navigationBar.scrollEdgeAppearance = appearance
+//    }
+    
     func updateCountries() {
+        print("updating countries from the API")
         getCountries.execute(CCRequest.countryList) { result in
             switch result {
             case .success(let data):
             var set = Set<String>()
-            self.countries = data.countries
+            self.storedCountries = data.countries
                 .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
-                .sorted(by: self.sortedBy)
+            self.displayedCountries = self.storedCountries.sorted(by: self.sortedBy)
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    func filterCountries() {
+        guard !self.searchText.isEmpty else {
+            self.displayedCountries = self.storedCountries.sorted(by: self.sortedBy)
+            return
+        }
+        
+        self.displayedCountries = self.storedCountries
+            .filter({ $0.name.localizedCaseInsensitiveContains(self.searchText)})
+            .sorted(by: self.sortedBy)
     }
 }
 
@@ -126,6 +151,7 @@ extension Array where Element == Country {
         self = sorted(by: sorter)
     }
 }
+
 extension Array where Element: Hashable {
     var uniqueElements: [Element] {
         var set = Set<Element>()
@@ -143,11 +169,10 @@ struct CountryRow: View {
     let country: Country
     
     var body: some View {
-        //        Text("sgksj")
         GeometryReader { geometry in
             HStack(spacing: .zero) {
                 HStack {
-                    Text(self.country.name)//.padding(.leading)
+                    Text(self.country.name)
                     Spacer()
                 }
                 .frame(width: geometry.width * 0.4)
@@ -178,7 +203,53 @@ extension Int {
 }
 struct CountryList_Previews: PreviewProvider {
     static var previews: some View {
-        //        CountryList()
-        CountryRow(country: Model.country)
+        CountryList().sectionHeader
+//        CountryRow(country: Model.country)
+    }
+}
+
+public struct SearchField: View {
+    @Binding var searchText: String
+    @State private var showCancelButton: Bool = false
+
+    public init(searchText: Binding<String>) {
+        self._searchText = searchText
+    }
+    
+    public var body: some View {
+        // Search view
+        HStack {
+            HStack {
+                Image(systemName: "magnifyingglass")
+
+                TextField("search", text: $searchText, onEditingChanged: { isEditing in
+                    self.showCancelButton = true
+                }, onCommit: {
+                    print("onCommit")
+                }).foregroundColor(.primary)
+
+                Button(action: {
+                    self.searchText = ""
+                }) {
+                    Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
+                }
+            }
+            .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+            .foregroundColor(.secondary)
+            .background(Color(.secondarySystemBackground))
+            .cornerRadius(10.0)
+
+            if showCancelButton  {
+                Button("Cancel") {
+                        UIApplication.dismissKeyboard() // this must be placed before the other commands here
+                        self.searchText = ""
+                        self.showCancelButton = false
+                }
+                .foregroundColor(Color(.systemBlue))
+                .animation(.easeInOut)
+            }
+        }
+        .animation(.easeInOut)
+        .padding(.horizontal)
     }
 }

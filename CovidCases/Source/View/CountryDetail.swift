@@ -13,6 +13,9 @@ struct CountryDetail: View {
     
     var body: some View {
         Text(country.name)
+            .navigationBarTitle(Text(country.name), displayMode: .large)
+//            .navigationBarTitle(country.name, displayMode: .large)
+//            .navigationBarTitle(country.name)
     }
 }
 
@@ -21,3 +24,4 @@ struct CountryDetail_Previews: PreviewProvider {
         CountryDetail(country: Model.country)
     }
 }
+
