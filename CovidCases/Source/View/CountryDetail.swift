@@ -13,10 +13,43 @@ struct CountryDetail: View {
     let country: Country
     
     var body: some View {
-        detailScrollView
+        detailListView
             .navigationBarTitle(Text(country.name), displayMode: .large)
-        //            .navigationBarTitle(country.name, displayMode: .large)
-        //            .navigationBarTitle(country.name)
+    }
+    
+    fileprivate var detailListView: some View {
+        List {
+            ItemRow(title: "Total affected", count: country.totalConfirmed)
+            ItemRow(title: "Active now", count: country.activeCases, color: .pink)
+            ItemRow(title: "Recovered fully", count: country.totalRecovered, color: .green)
+            ItemRow(title: "Died", count: country.totalDeaths, color: .red)
+            Section(header: CenteredHeaderFooter(lastUpdatedTime),
+                    footer: CenteredHeaderFooter("Source: covid19api.com by JHU CSSE"),
+                    content: { EmptyView() })
+        }
+        .listRowInsets(EdgeInsets(top: .medium, leading: .large, bottom: .medium, trailing: .large))
+        .listStyle(GroupedListStyle())
+        .environment(\.horizontalSizeClass, .regular)
+    }
+    
+    private var lastUpdatedTime: String {
+        if let time = Defaults.updatedTime {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMMM dd, HH:mm"
+            return "Last updated time:" + formatter.string(from: time)
+        }
+        
+        return ""
+    }
+    
+    fileprivate func getStack(for title: String, withCount count: Int) -> some View {
+        Section {
+            HStack {
+                Text(title)
+                Spacer()
+                Text("\(count)").font(.title)
+            }.frame(minHeight: .averageTouchSize * 2)
+        }
     }
     
     fileprivate var detailScrollView: some View {
@@ -25,14 +58,7 @@ struct CountryDetail: View {
                 Color(UIColor.systemGroupedBackground)
                 cards
             }
-            
-            //            }
         }
-//        .background(Color(UIColor.systemGroupedBackground))
-        //    .padding()
-        //        .listRowInsets(EdgeInsets(top: .medium, leading: .large, bottom: .medium, trailing: .large))
-        //        .listStyle(GroupedListStyle())
-        //        .environment(\.horizontalSizeClass, .regular)
     }
     
     fileprivate var cards: some View {
@@ -88,6 +114,37 @@ struct CountryDetail: View {
     }
 }
 
+struct ItemRow: View {
+    let title: String
+    let count: Int
+    var color: Color = .primary
+    
+    var body: some View {
+        Section {
+            HStack {
+                Text(title)
+                Spacer()
+                Text("\(count)").font(.title).foregroundColor(color)
+            }.frame(minHeight: .averageTouchSize * 2)
+        }
+    }
+}
+
+struct CenteredHeaderFooter: View {
+    let text: String
+    
+    init(_ text: String) {
+        self.text = text
+    }
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(text)
+            Spacer()
+        }
+    }
+}
 struct CountryDetail_Previews: PreviewProvider {
     static var previews: some View {
         CountryDetail(country: Model.country).detailScrollView

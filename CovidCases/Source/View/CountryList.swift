@@ -107,6 +107,9 @@ struct CountryList: View {
         getCountries.execute(CCRequest.countryList) { result in
             switch result {
             case .success(let data):
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                Defaults.updatedTime = formatter.date(from: String(data.date.prefix(19)) + "Z")
             var set = Set<String>()
             self.storedCountries = data.countries
                 .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
