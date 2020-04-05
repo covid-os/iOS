@@ -15,12 +15,12 @@ class Model {
                 slug: UUID().uuidString,
                 code: ["in", "us", "uk", "au"].randomElement()!,
                 dateString: "2020-04-05T03:24:27Z",
-            newConfirmed: Int.random(in: 10...1000),
-            totalConfirmed: Int.random(in: 10000...80000),
-            newDeaths: Int.random(in: 0...100),
-            totalDeaths: Int.random(in: 0...2000),
-            newRecovered: Int.random(in: 1000...5000),
-            totalRecovered: Int.random(in: 0...100000))
+                newConfirmed: Int.random(in: 10...1000),
+                totalConfirmed: Int.random(in: 10000...80000),
+                newDeaths: Int.random(in: 0...100),
+                totalDeaths: Int.random(in: 0...2000),
+                newRecovered: Int.random(in: 1000...5000),
+                totalRecovered: Int.random(in: 0...100000))
     }
     
     static func countries(count: Int) -> [Country] {
@@ -98,7 +98,7 @@ class Country: Codable {
     var recoveredPercent: String { getPercent(of: totalRecovered) }
     var diedPercentage: String { getPercent(of: totalDeaths) }
     var newCasesPercent: String { getPercent(of: newConfirmed) }
-    var newRecoveredPercent: String { getPercent(of: newRecovered) }
+//    var newRecoveredPercent: String { getPercent(of: newRecovered) }
     var newDeathsPercent: String { getPercent(of: newDeaths) }
     
     func getPercent(of count: Int) -> String {
@@ -108,17 +108,6 @@ class Country: Codable {
         return formatter.string(from: NSNumber(value: percent)) ?? String(format: "%.2f%%", percent)
     }
 }
-
-//extension Country: Hashable {
-//    
-//    static func == (lhs: Country, rhs: Country) -> Bool {
-//        lhs.slug == rhs.slug
-//    }
-//    
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(slug)
-//    }
-//}
 
 class CountriesStore {
     static var savedInDocs: CountryData? {

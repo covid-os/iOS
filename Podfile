@@ -6,7 +6,8 @@ target 'CovidCases' do
   use_frameworks!
 
   # Pods for CovidCases
-pod 'SwiftyUserInterface', :path=> '~/Desktop/Apps/Frameworks/SwiftyUserInterface'
+pod 'SwiftyUserInterface', :git=> 'https://gitlab.com/frameworks1/swiftyuserinterface'
+#, :path=> '~/Desktop/Apps/Frameworks/SwiftyUserInterface'
 pod 'MINetworkKit'#, :git=> 'https://gitlab.com/imthath_m/mi-network-kit', :branch=> 'develop'
 
 end

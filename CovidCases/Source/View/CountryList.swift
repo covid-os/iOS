@@ -14,7 +14,7 @@ struct CountryList: View {
     @State private var displayedCountries: [Country] = []
     @State private var storedCountries: [Country] = Self.filteredCountries
     @State private var searchText: String = ""
-    @State private var sortedBy: CountrySort = .total
+    @State private var sortedBy: CountrySort = .recovered
     
     static var filteredCountries: [Country] {
         var set = Set<String>()
@@ -62,7 +62,7 @@ struct CountryList: View {
     }
     
     fileprivate var section: some View {
-        Section(header: sectionHeader) {
+        Section(header: sectionHeader.frame(height: .averageTouchSize)) {
             ForEach(displayedCountries, id: \.code) { country in
                 NavigationLink(destination: CountryDetail(country: country)) {
                     CountryRow(country: country)

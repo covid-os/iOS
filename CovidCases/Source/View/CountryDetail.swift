@@ -19,25 +19,19 @@ struct CountryDetail: View {
     
     fileprivate var detailListView: some View {
         List {
-            Section(header: topHeader, content: { EmptyView() })
-            ItemRow(title: "Recent cases", count: country.newConfirmed,
-                    color: .yellow, percentage: country.newCasesPercent)
-            ItemRow(title: "Active cases", count: country.activeCases,
+            Section(header: topHeader.frame(height: .averageTouchSize * 2), content: {
+                ItemRow(title: "Recent cases", count: country.newConfirmed,
+                        color: .orange, percentage: country.newCasesPercent)
+            })
+            ItemSection(title: "Active cases", count: country.activeCases,
                     color: .orange, percentage: country.activePercentage)
-            ItemRow(title: "Recovered", count: country.totalRecovered,
+            ItemSection(title: "Recovered", count: country.totalRecovered,
                     color: .green, percentage: country.recoveredPercent)
-//            ItemRow(title: "Recently Recovered", count: country.newRecovered,
-//                    color: .green, percentage: country.newRecoveredPercent)
-            ItemRow(title: "Recent Deaths", count: country.newDeaths,
+            ItemSection(title: "Recent Deaths", count: country.newDeaths,
                     color: .red, percentage: country.newDeathsPercent)
-            ItemRow(title: "Total Deaths", count: country.totalDeaths,
+            ItemSection(title: "Total Deaths", count: country.totalDeaths,
                     color: .red, percentage: country.diedPercentage)
-            Section(header: CenteredHeaderFooter(lastUpdatedTime),
-                    footer: CenteredHeaderFooter("Source: covid19api.com by JHU"),
-                    content: { EmptyView() })
-            Section(header: CenteredHeaderFooter("Tweet to the developer @imthath_m"),
-                    footer: CenteredHeaderFooter("Open sourced at github.com/covid-os/iOS"),
-                    content: { EmptyView() })
+            Section(header: footer.frame(height: .averageTouchSize * 4), content: { EmptyView() })
         }
         .listRowInsets(EdgeInsets(top: .medium, leading: .large, bottom: .medium, trailing: .large))
         .listStyle(GroupedListStyle())
@@ -46,12 +40,26 @@ struct CountryDetail: View {
     
     private var topHeader: some View {
         GeometryReader { geometry in
-            Text("Total cases - \(self.country.totalConfirmed)")
-                .font(.title)
-                .foregroundColor(.primary)
-                .frame(width: geometry.width)
+            ZStack(alignment: .bottom) {
+                Text("Total cases - \(self.country.totalConfirmed)")
+                    .frame(width: geometry.width)
+            }
+            .font(.title)
+            .foregroundColor(.primary)
         }
         
+    }
+    
+    private var footer: some View {
+        GeometryReader { geometry in
+            VStack(spacing: .medium) {
+                Text(self.lastUpdatedTime)
+                Text("Source: covid19api.com by JHU")
+                Text("App logo from CDC on Unspash")
+                Text("Tweet to the developer @imthath_m")
+                Text("Open sourced at github.com/covid-os/iOS")
+            }.frame(width: geometry.width)
+        }
     }
     
     private var lastUpdatedTime: String {
@@ -65,20 +73,33 @@ struct CountryDetail: View {
     }
 }
 
+struct ItemSection: View {
+    let title: String
+    let count: Int
+    var color: Color = .primary
+    var percentage: String
+    
+    var body: some View {
+        Section {
+            ItemRow(title: title, count: count,
+                    color: color, percentage: percentage)
+        }
+    }
+}
+
+
 struct ItemRow: View {
     let title: String
     let count: Int
     var color: Color = .primary
-    var percentage: String? = nil
+    var percentage: String
     
     var body: some View {
-        Section {
-            HStack {
-                Text(title)
-                Spacer()
-                numberStack
-            }.frame(minHeight: .averageTouchSize * 2)
-        }
+        HStack {
+            Text(title)
+            Spacer()
+            numberStack
+        }.frame(minHeight: .averageTouchSize * 2)
     }
     
     var numberStack: some View {
@@ -86,11 +107,7 @@ struct ItemRow: View {
             Spacer()
             Text("\(count)")
                 .font(.title)
-            //            HStack {
-            //                Spacer()
-            Text(percentage == nil ? "" : percentage!)
-            //            }
-            
+            Text(percentage)
         }
         .foregroundColor(color)
     }
