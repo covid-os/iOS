@@ -19,6 +19,7 @@
 		A85B78FC2436F27300AE9687 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B78FB2436F27300AE9687 /* Model.swift */; };
 		A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8792DED243799BA00DE61CA /* CountryDetail.swift */; };
 		A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECCE0D2438651400DE57B5 /* Common.swift */; };
+		A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */ = {isa = PBXBuildFile; fileRef = A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		A85B78FB2436F27300AE9687 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A8792DED243799BA00DE61CA /* CountryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetail.swift; sourceTree = "<group>"; };
 		A8ECCE0D2438651400DE57B5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_countries_data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				A853A2B62436F0ED002FDC8E /* Source */,
 				A853A2A22436F0CF002FDC8E /* AppDelegate.swift */,
+				A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */,
 				A853A2A42436F0CF002FDC8E /* SceneDelegate.swift */,
 				A853A2A62436F0CF002FDC8E /* ContentView.swift */,
 				A853A2A82436F0D1002FDC8E /* Assets.xcassets */,
@@ -200,6 +203,7 @@
 			files = (
 				A853A2AF2436F0D1002FDC8E /* LaunchScreen.storyboard in Resources */,
 				A853A2AC2436F0D1002FDC8E /* Preview Assets.xcassets in Resources */,
+				A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */,
 				A853A2A92436F0D1002FDC8E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

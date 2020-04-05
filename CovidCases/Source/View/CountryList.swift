@@ -12,9 +12,15 @@ import MINetworkKit
 
 struct CountryList: View {
     @State private var displayedCountries: [Country] = []
-    @State private var storedCountries: [Country] = []
+    @State private var storedCountries: [Country] = Self.filteredCountries
     @State private var searchText: String = ""
     @State private var sortedBy: CountrySort = .total
+    
+    static var filteredCountries: [Country] {
+        var set = Set<String>()
+        return CountriesStore.data.countries
+        .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
+    }
     
     var getCountries = GetObject<CountryData>()
     
@@ -57,7 +63,7 @@ struct CountryList: View {
     
     fileprivate var section: some View {
         Section(header: sectionHeader) {
-            ForEach(displayedCountries, id: \.slug) { country in
+            ForEach(displayedCountries, id: \.code) { country in
                 NavigationLink(destination: CountryDetail(country: country)) {
                     CountryRow(country: country)
                 }
@@ -68,7 +74,7 @@ struct CountryList: View {
     fileprivate var sectionHeader: some View {
         GeometryReader { geometry in
             HStack(spacing: .zero) {
-                self.sortButton(for: .name, title: "COUNTRY")
+                self.sortButton(for: .name, title: "LOCATION (\(self.displayedCountries.count))")
                     .frame(width: geometry.width * 0.4)
                 self.sortButton(for: .total, title: "TOTAL")
                     .frame(width: geometry.width * 0.2)
@@ -83,8 +89,12 @@ struct CountryList: View {
     
     func sortButton(for sorter: CountrySort, title: String) -> some View {
         Button(action: {
-            self.sortedBy = sorter
-            self.displayedCountries.sort(by: sorter)
+            if self.sortedBy == sorter {
+                self.displayedCountries.reverse()
+            } else {
+                self.sortedBy = sorter
+                self.displayedCountries.sort(by: sorter)
+            }
         }, label: {
             Text(title)
                 .font(.custom("Gill Sans", size: .small * 1.4))
@@ -103,17 +113,26 @@ struct CountryList: View {
 //    }
     
     func updateCountries() {
-        print("updating countries from the API")
+        if displayedCountries.isEmpty {
+            Console.shared.log("showing data for the first time")
+            self.filterCountries()
+        }
+        
+        print("making API requst")
         getCountries.execute(CCRequest.countryList) { result in
             switch result {
             case .success(let data):
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                Defaults.updatedTime = formatter.date(from: String(data.date.prefix(19)) + "Z")
-            var set = Set<String>()
-            self.storedCountries = data.countries
-                .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
-            self.displayedCountries = self.storedCountries.sorted(by: self.sortedBy)
+                print("API requst success")
+                
+                // TODO: the data conversion operation happens twice in this two lines. can remove once.
+                guard data.lastUpdatedTime != Defaults.updatedTime else { return }
+                data.updateTime()
+                
+                CountriesStore.save(data)
+                var set = Set<String>()
+                self.storedCountries = data.countries
+                    .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
+                self.filterCountries()
             case .failure(let error):
                 print(error)
             }

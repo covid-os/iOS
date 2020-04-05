@@ -14,8 +14,8 @@
             filePath = "CovidCases/Source/View/CountryList.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "CountryList"
             landmarkType = "14">
          </BreakpointContent>
@@ -23,32 +23,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5EF01A08-CE4D-4DAB-AC5C-89E42B8812F2"
+            uuid = "190E0706-71C3-4BC6-BF53-4171B62D8DD7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/View/CountryList.swift"
+            filePath = "CovidCases/Source/Common.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "updateCountries()"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getBundledObject(inFile:ofType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2EE6844C-BFF9-4CC1-994C-B163AAAA1BEB"
+            uuid = "B199717E-6B04-4BBD-A683-FCA26A911913"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/View/CountryList.swift"
+            filePath = "CovidCases/Source/Common.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "updateCountries()"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "getBundledObject(inFile:ofType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

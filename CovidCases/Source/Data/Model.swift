@@ -12,7 +12,9 @@ class Model {
     
     static var country: Country {
         Country(country: ["India", "America", "United Kindgon", "Australia"].randomElement()!,
-                slug: UUID().uuidString,// ["in", "us", "uk", "au"].randomElement()!,
+                slug: UUID().uuidString,
+                code: ["in", "us", "uk", "au"].randomElement()!,
+                dateString: "2020-04-05T03:24:27Z",
             newConfirmed: Int.random(in: 10...1000),
             totalConfirmed: Int.random(in: 10000...80000),
             newDeaths: Int.random(in: 0...100),
@@ -33,28 +35,38 @@ class Model {
 // MARK: - Welcome
 class CountryData: Codable {
     let countries: [Country]
-    let date: String
+    let dateString: String
     
     enum CodingKeys: String, CodingKey {
         case countries = "Countries"
-        case date = "Date"
+        case dateString = "Date"
     }
     
     init(countries: [Country], date: String) {
         self.countries = countries
-        self.date = date
+        self.dateString = date
     }
+    
+    func updateTime() {
+        if let time = lastUpdatedTime {
+            Defaults.updatedTime = time
+        }
+    }
+    
+    var lastUpdatedTime: Date? { dateString.date }
 }
 
 // MARK: - Country
 class Country: Codable {
-    let name, slug: String
+    let name, slug, code, dateString: String
     let newConfirmed, totalConfirmed, newDeaths, totalDeaths: Int
     let newRecovered, totalRecovered: Int
     
     enum CodingKeys: String, CodingKey {
         case name = "Country"
         case slug = "Slug"
+        case code = "CountryCode"
+        case dateString = "Date"
         case newConfirmed = "NewConfirmed"
         case totalConfirmed = "TotalConfirmed"
         case newDeaths = "NewDeaths"
@@ -63,11 +75,14 @@ class Country: Codable {
         case totalRecovered = "TotalRecovered"
     }
     
-    init(country: String, slug: String, newConfirmed: Int,
+    init(country: String, slug: String, code: String,
+         dateString: String, newConfirmed: Int,
          totalConfirmed: Int, newDeaths: Int, totalDeaths: Int,
          newRecovered: Int, totalRecovered: Int) {
         self.name = country
         self.slug = slug
+        self.code = code
+        self.dateString = dateString
         self.newConfirmed = newConfirmed
         self.totalConfirmed = totalConfirmed
         self.newDeaths = newDeaths
@@ -78,6 +93,20 @@ class Country: Codable {
     
     var activeCases: Int { totalConfirmed - totalRecovered - totalDeaths }
     //    var newActiveCases: Int { newConfirmed  - newRecovered - newDeaths }
+    
+    var activePercentage: String { getPercent(of: activeCases) }
+    var recoveredPercent: String { getPercent(of: totalRecovered) }
+    var diedPercentage: String { getPercent(of: totalDeaths) }
+    var newCasesPercent: String { getPercent(of: newConfirmed) }
+    var newRecoveredPercent: String { getPercent(of: newRecovered) }
+    var newDeathsPercent: String { getPercent(of: newDeaths) }
+    
+    func getPercent(of count: Int) -> String {
+        let percent = Double(count) / Double(totalConfirmed)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        return formatter.string(from: NSNumber(value: percent)) ?? String(format: "%.2f%%", percent)
+    }
 }
 
 //extension Country: Hashable {
@@ -90,3 +119,29 @@ class Country: Codable {
 //        hasher.combine(slug)
 //    }
 //}
+
+class CountriesStore {
+    static var savedInDocs: CountryData? {
+        return FileIO.shared.getOjbectFromFile(named: "covid-store", withType: .json)
+    }
+    
+    static func save(_ data: CountryData) {
+        FileIO.shared.save(data, to: "covid-store", as: .json)
+    }
+    
+    static var loadedFromBundle: CountryData {
+        return FileIO.shared.getBundledObject(inFile: "covid_countries_data", ofType: .json)!
+    }
+    
+    static var data: CountryData {
+        if let data = CountriesStore.savedInDocs {
+            return data
+        }
+        
+        let data = CountriesStore.loadedFromBundle
+        
+        data.updateTime()
+        
+        return data
+    }
+}
