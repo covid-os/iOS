@@ -11,6 +11,9 @@ import SwiftyUserInterface
 import MINetworkKit
 
 struct CountryList: View {
+    
+    @ObservedObject var device: Device = Device.shared
+    
     @State private var displayedCountries: [Country] = []
     @State private var storedCountries: [Country] = Self.filteredCountries
     @State private var searchText: String = ""
@@ -25,14 +28,23 @@ struct CountryList: View {
     var getCountries = GetObject<CountryData>()
     
     var body: some View {
+        myView
+    }
+    
+    var myView: some View {
+      if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
+          return AnyView(navView.navigationViewStyle(StackNavigationViewStyle()))
+      } else {
+          return AnyView(navView.navigationViewStyle(DoubleColumnNavigationViewStyle()))
+      }
+    }
+    
+    var navView: some View {
         NavigationView {
             viewStack
                 .onAppear(perform: updateCountries)
-                .navigationBarTitle("COVID-19 cases", displayMode: .inline)
+                .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
                 .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill", andAction: updateCountries))
-//                .introspectNavigationController { navigationController in
-//                    self.setColors(to: navigationController.navigationBar)
-//            }
         }
     }
     
@@ -44,6 +56,7 @@ struct CountryList: View {
         
         return ZStack {
             Color(UIColor.systemGroupedBackground)
+                .edgesIgnoringSafeArea(.all)
             VStack {
                 SearchField(searchText: binding).padding(.bottom, .small)
                 listView
@@ -58,6 +71,7 @@ struct CountryList: View {
         .listRowInsets(EdgeInsets(top: .small, leading: .small, bottom: .small, trailing: .zero))
         .introspectTableView { tableView in
             tableView.tableFooterView = UIView()
+            tableView.keyboardDismissMode = .onDrag
         }
     }
     
@@ -97,7 +111,8 @@ struct CountryList: View {
             }
         }, label: {
             Text(title)
-                .font(.custom("Gill Sans", size: .small * 1.4))
+                .font(.footnote)
+//                .font(.custom("Gill Sans", size: .small * 1.5))
                 .foregroundColor(sortedBy == sorter ? .blue : .primary)
         })
         
