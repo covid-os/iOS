@@ -9,10 +9,20 @@
 import Foundation
 import UIKit
 
+protocol Location {
+    var name: String { get }
+    var id: String { get }
+    var totalCases: Int { get }
+    var activeCases: Int { get }
+    var recoveredCases: Int { get }
+}
+
 extension String {
     var date: Date? {
         Cache.dateFormatter.date(from: self)
     }
+    
+    var number: Int { Int(self) ?? 0 }
 }
 
 class Cache {
@@ -63,8 +73,8 @@ public class FileIO {
     let logger: LoggerProtocol
     public static let shared = FileIO(logger: Console.shared)
     
-    private let encoder = JSONEncoder()
-    private let decoder = JSONDecoder()
+    private var encoder: JSONEncoder { JSONEncoder() }
+    private var decoder: JSONDecoder { JSONDecoder() }
     
     public init(logger: LoggerProtocol) {
         self.logger = logger

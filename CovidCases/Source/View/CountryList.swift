@@ -17,12 +17,12 @@ struct CountryList: View {
     @State private var displayedCountries: [Country] = []
     @State private var storedCountries: [Country] = Self.filteredCountries
     @State private var searchText: String = ""
-    @State private var sortedBy: CountrySort = .recovered
+    @State private var sortedBy: LocationSorter = .recovered
     
     static var filteredCountries: [Country] {
         var set = Set<String>()
         return CountriesStore.data.countries
-        .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
+        .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
     }
     
     var getCountries = GetObject<CountryData>()
@@ -42,9 +42,10 @@ struct CountryList: View {
     var navView: some View {
         NavigationView {
             viewStack
-                .onAppear(perform: updateCountries)
+                .onAppear(perform: autoUpdateCountries)
                 .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
-                .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill", andAction: updateCountries))
+                .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill",
+                                                          andAction: updateCountries))
         }
     }
     
@@ -101,7 +102,7 @@ struct CountryList: View {
         }
     }
     
-    func sortButton(for sorter: CountrySort, title: String) -> some View {
+    func sortButton(for sorter: LocationSorter, title: String) -> some View {
         Button(action: {
             if self.sortedBy == sorter {
                 self.displayedCountries.reverse()
@@ -111,8 +112,8 @@ struct CountryList: View {
             }
         }, label: {
             Text(title)
-                .font(.footnote)
-//                .font(.custom("Gill Sans", size: .small * 1.5))
+//                .font(.footnote)
+                .font(.custom("Gill Sans", size: .small * 1.5))
                 .foregroundColor(sortedBy == sorter ? .blue : .primary)
         })
         
@@ -127,12 +128,21 @@ struct CountryList: View {
 //        navigationBar.scrollEdgeAppearance = appearance
 //    }
     
-    func updateCountries() {
+    func autoUpdateCountries() {
         if displayedCountries.isEmpty {
             Console.shared.log("showing data for the first time")
             self.filterCountries()
         }
         
+        if let updatedTime = Defaults.updatedTime,
+            Date().timeIntervalSince(updatedTime) < 1799 {
+            return
+        }
+                
+        updateCountries()
+    }
+    
+    func updateCountries() {
         print("making API requst")
         getCountries.execute(CCRequest.countryList) { result in
             switch result {
@@ -146,7 +156,7 @@ struct CountryList: View {
                 CountriesStore.save(data)
                 var set = Set<String>()
                 self.storedCountries = data.countries
-                    .filter({ $0.totalConfirmed > 0 && set.insert($0.slug).0 })
+                    .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
                 self.filterCountries()
             case .failure(let error):
                 print(error)
@@ -166,7 +176,7 @@ struct CountryList: View {
     }
 }
 
-enum CountrySort {
+enum LocationSorter {
     case name
     case total
     case active
@@ -174,20 +184,20 @@ enum CountrySort {
 }
 
 extension Array where Element == Country {
-    func sorted(by sorter: CountrySort) -> [Element] {
+    func sorted(by sorter: LocationSorter) -> [Element] {
         switch sorter {
         case .name:
             return sorted(by: { $0.name < $1.name })
         case .total:
-            return sorted(by: { $0.totalConfirmed > $1.totalConfirmed })
+            return sorted(by: { $0.totalCases > $1.totalCases })
         case .active:
             return sorted(by: { $0.activeCases > $1.activeCases })
         case .recovered:
-            return sorted(by: { $0.totalRecovered > $1.totalRecovered })
+            return sorted(by: { $0.recoveredCases > $1.recoveredCases })
         }
     }
     
-    mutating func sort(by sorter: CountrySort) {
+    mutating func sort(by sorter: LocationSorter) {
         self = sorted(by: sorter)
     }
 }
@@ -216,11 +226,11 @@ struct CountryRow: View {
                     Spacer()
                 }
                 .frame(width: geometry.width * 0.4)
-                Text(self.country.totalConfirmed.formatted)
+                Text(self.country.totalCases.formatted)
                     .frame(width: geometry.width * 0.2)
                 Text(self.country.activeCases.formatted)
                     .frame(width: geometry.width * 0.2)
-                Text(self.country.totalRecovered.formatted)
+                Text(self.country.recoveredCases.formatted)
                     .frame(width: geometry.width * 0.2)
             }
         }

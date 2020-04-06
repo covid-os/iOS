@@ -57,10 +57,12 @@ class CountryData: Codable {
 }
 
 // MARK: - Country
-class Country: Codable {
+class Country: Codable, Location {
     let name, slug, code, dateString: String
-    let newConfirmed, totalConfirmed, newDeaths, totalDeaths: Int
-    let newRecovered, totalRecovered: Int
+    let newConfirmed, totalCases, newDeaths, totalDeaths: Int
+    let newRecovered, recoveredCases: Int
+    
+    var id: String { code }
     
     enum CodingKeys: String, CodingKey {
         case name = "Country"
@@ -68,11 +70,11 @@ class Country: Codable {
         case code = "CountryCode"
         case dateString = "Date"
         case newConfirmed = "NewConfirmed"
-        case totalConfirmed = "TotalConfirmed"
+        case totalCases = "TotalConfirmed"
         case newDeaths = "NewDeaths"
         case totalDeaths = "TotalDeaths"
         case newRecovered = "NewRecovered"
-        case totalRecovered = "TotalRecovered"
+        case recoveredCases = "TotalRecovered"
     }
     
     init(country: String, slug: String, code: String,
@@ -84,25 +86,25 @@ class Country: Codable {
         self.code = code
         self.dateString = dateString
         self.newConfirmed = newConfirmed
-        self.totalConfirmed = totalConfirmed
+        self.totalCases = totalConfirmed
         self.newDeaths = newDeaths
         self.totalDeaths = totalDeaths
         self.newRecovered = newRecovered
-        self.totalRecovered = totalRecovered
+        self.recoveredCases = totalRecovered
     }
     
-    var activeCases: Int { totalConfirmed - totalRecovered - totalDeaths }
+    var activeCases: Int { totalCases - recoveredCases - totalDeaths }
     //    var newActiveCases: Int { newConfirmed  - newRecovered - newDeaths }
     
     var activePercentage: String { getPercent(of: activeCases) }
-    var recoveredPercent: String { getPercent(of: totalRecovered) }
+    var recoveredPercent: String { getPercent(of: recoveredCases) }
     var diedPercentage: String { getPercent(of: totalDeaths) }
     var newCasesPercent: String { getPercent(of: newConfirmed) }
 //    var newRecoveredPercent: String { getPercent(of: newRecovered) }
     var newDeathsPercent: String { getPercent(of: newDeaths) }
     
     func getPercent(of count: Int) -> String {
-        let percent = Double(count) / Double(totalConfirmed)
+        let percent = Double(count) / Double(totalCases)
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         return formatter.string(from: NSNumber(value: percent)) ?? String(format: "%.2f%%", percent)

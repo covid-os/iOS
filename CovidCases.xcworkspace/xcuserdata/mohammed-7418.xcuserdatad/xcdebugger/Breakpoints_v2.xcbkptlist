@@ -14,8 +14,8 @@
             filePath = "CovidCases/Source/View/CountryList.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "CountryList"
             landmarkType = "14">
          </BreakpointContent>
@@ -23,32 +23,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "190E0706-71C3-4BC6-BF53-4171B62D8DD7"
+            uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/Common.swift"
+            filePath = "CovidCases/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "getBundledObject(inFile:ofType:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B199717E-6B04-4BBD-A683-FCA26A911913"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/Common.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "getBundledObject(inFile:ofType:)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "updateStates()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

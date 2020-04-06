@@ -7,11 +7,27 @@
 //
 
 import SwiftUI
+import MINetworkKit
 
 struct ContentView: View {
+    
+    let getStates = GetObject<India>()
+    
     var body: some View {
         CountryList()
 //        CountryDetail(country: Model.country)
+//        Text("India").onAppear(perform: updateStates)
+    }
+    
+    func updateStates() {
+        getStates.execute(CIRequest.allData) { result in
+            switch result {
+            case .success(let india):
+                print(india.statewise.count)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

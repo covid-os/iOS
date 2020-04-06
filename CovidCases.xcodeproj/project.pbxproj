@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5EB0363661DF2A58F39ACF42 /* Pods_CovidCases.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */; };
 		A80712F12436FACF0068E6C5 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80712F02436FACF0068E6C5 /* CCRequest.swift */; };
+		A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B44B8243AE27600AACAF5 /* IndiaModel.swift */; };
 		A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A22436F0CF002FDC8E /* AppDelegate.swift */; };
 		A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A42436F0CF002FDC8E /* SceneDelegate.swift */; };
 		A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A62436F0CF002FDC8E /* ContentView.swift */; };
@@ -27,7 +28,8 @@
 		741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CovidCases.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		976AAB899D99CCFB3980B38A /* Pods-CovidCases.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidCases.debug.xcconfig"; path = "Target Support Files/Pods-CovidCases/Pods-CovidCases.debug.xcconfig"; sourceTree = "<group>"; };
 		A80712F02436FACF0068E6C5 /* CCRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
-		A853A29F2436F0CF002FDC8E /* COVID stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A83B44B8243AE27600AACAF5 /* IndiaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaModel.swift; sourceTree = "<group>"; };
+		A853A29F2436F0CF002FDC8E /* COVID Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A853A2A22436F0CF002FDC8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A853A2A42436F0CF002FDC8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A853A2A62436F0CF002FDC8E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		A853A2A02436F0CF002FDC8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A853A29F2436F0CF002FDC8E /* COVID stats.app */,
+				A853A29F2436F0CF002FDC8E /* COVID Stats.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +121,7 @@
 			children = (
 				A85B78FB2436F27300AE9687 /* Model.swift */,
 				A80712F02436FACF0068E6C5 /* CCRequest.swift */,
+				A83B44B8243AE27600AACAF5 /* IndiaModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -160,7 +163,7 @@
 			);
 			name = CovidCases;
 			productName = CovidCases;
-			productReference = A853A29F2436F0CF002FDC8E /* COVID stats.app */;
+			productReference = A853A29F2436F0CF002FDC8E /* COVID Stats.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -265,6 +268,7 @@
 				A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */,
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
 				A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */,
+				A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +416,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.imthath.CovidCases;
-				PRODUCT_NAME = "COVID stats";
+				PRODUCT_NAME = "COVID Stats";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -434,7 +438,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.imthath.CovidCases;
-				PRODUCT_NAME = "COVID stats";
+				PRODUCT_NAME = "COVID Stats";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

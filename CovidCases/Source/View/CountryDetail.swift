@@ -25,7 +25,7 @@ struct CountryDetail: View {
             })
             ItemSection(title: "Active cases", count: country.activeCases,
                     color: .orange, percentage: country.activePercentage)
-            ItemSection(title: "Recovered", count: country.totalRecovered,
+            ItemSection(title: "Recovered", count: country.recoveredCases,
                     color: .green, percentage: country.recoveredPercent)
             ItemSection(title: "Recent Deaths", count: country.newDeaths,
                     color: .red, percentage: country.newDeathsPercent)
@@ -41,7 +41,7 @@ struct CountryDetail: View {
     private var topHeader: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                Text("Total cases - \(self.country.totalConfirmed)")
+                Text("Total cases - \(self.country.totalCases)")
                     .frame(width: geometry.width)
             }
             .font(.title)
