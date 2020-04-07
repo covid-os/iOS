@@ -9,12 +9,17 @@
 import Foundation
 import UIKit
 
-protocol Location {
-    var name: String { get }
-    var id: String { get }
-    var totalCases: Int { get }
-    var activeCases: Int { get }
-    var recoveredCases: Int { get }
+public struct Defaults {
+    @SDDefault("updatedTime", defaultValue: nil)
+    static var updatedTime: Date?
+}
+
+class Cache {
+    static var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return formatter
+    }()
 }
 
 extension String {
@@ -25,12 +30,16 @@ extension String {
     var number: Int { Int(self) ?? 0 }
 }
 
-class Cache {
-    static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return formatter
-    }()
+extension Array where Element: Hashable {
+    var uniqueElements: [Element] {
+        var set = Set<Element>()
+
+        return filter { set.insert($0).0 }
+    }
+
+    mutating func removeDuplicates() {
+        self = self.uniqueElements
+    }
 }
 
 @propertyWrapper
@@ -47,11 +56,6 @@ public struct SDDefault<T> {
         get { UserDefaults.standard.object(forKey: key) as? T ?? defaultValue }
         set { UserDefaults.standard.set(newValue, forKey: key) }
     }
-}
-
-public struct Defaults {
-    @SDDefault("updatedTime", defaultValue: nil)
-    static var updatedTime: Date?
 }
 
 public protocol LoggerProtocol {

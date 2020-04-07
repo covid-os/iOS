@@ -17,7 +17,7 @@ struct CountryList: View {
     @State private var displayedCountries: [Country] = []
     @State private var storedCountries: [Country] = Self.filteredCountries
     @State private var searchText: String = ""
-    @State private var sortedBy: LocationSorter = .recovered
+    @State private var sortedBy: LocationSorter = .total
     
     static var filteredCountries: [Country] {
         var set = Set<String>()
@@ -80,43 +80,14 @@ struct CountryList: View {
         Section(header: sectionHeader.frame(height: .averageTouchSize)) {
             ForEach(displayedCountries, id: \.code) { country in
                 NavigationLink(destination: CountryDetail(country: country)) {
-                    CountryRow(country: country)
+                    LocationRow(location: country)
                 }
             }
         }
     }
     
     fileprivate var sectionHeader: some View {
-        GeometryReader { geometry in
-            HStack(spacing: .zero) {
-                self.sortButton(for: .name, title: "LOCATION (\(self.displayedCountries.count))")
-                    .frame(width: geometry.width * 0.4)
-                self.sortButton(for: .total, title: "TOTAL")
-                    .frame(width: geometry.width * 0.2)
-                self.sortButton(for: .active, title: "ACTIVE")
-                    .frame(width: geometry.width * 0.2)
-                self.sortButton(for: .recovered, title: "RECOVERED")
-                    .frame(width: geometry.width * 0.2, height: .averageTouchSize)
-            }
-            .frame(height: .averageTouchSize * 1.5)
-        }
-    }
-    
-    func sortButton(for sorter: LocationSorter, title: String) -> some View {
-        Button(action: {
-            if self.sortedBy == sorter {
-                self.displayedCountries.reverse()
-            } else {
-                self.sortedBy = sorter
-                self.displayedCountries.sort(by: sorter)
-            }
-        }, label: {
-            Text(title)
-//                .font(.footnote)
-                .font(.custom("Gill Sans", size: .small * 1.5))
-                .foregroundColor(sortedBy == sorter ? .blue : .primary)
-        })
-        
+        LocationHeader(currentSorter: $sortedBy, locations: $displayedCountries)
     }
     
 //    func setColors(to navigationBar: UINavigationBar) {
@@ -176,67 +147,6 @@ struct CountryList: View {
     }
 }
 
-enum LocationSorter {
-    case name
-    case total
-    case active
-    case recovered
-}
-
-extension Array where Element == Country {
-    func sorted(by sorter: LocationSorter) -> [Element] {
-        switch sorter {
-        case .name:
-            return sorted(by: { $0.name < $1.name })
-        case .total:
-            return sorted(by: { $0.totalCases > $1.totalCases })
-        case .active:
-            return sorted(by: { $0.activeCases > $1.activeCases })
-        case .recovered:
-            return sorted(by: { $0.recoveredCases > $1.recoveredCases })
-        }
-    }
-    
-    mutating func sort(by sorter: LocationSorter) {
-        self = sorted(by: sorter)
-    }
-}
-
-extension Array where Element: Hashable {
-    var uniqueElements: [Element] {
-        var set = Set<Element>()
-
-        return filter { set.insert($0).0 }
-    }
-
-    mutating func removeDuplicates() {
-        self = self.uniqueElements
-    }
-}
-
-
-struct CountryRow: View {
-    let country: Country
-    
-    var body: some View {
-        GeometryReader { geometry in
-            HStack(spacing: .zero) {
-                HStack {
-                    Text(self.country.name)
-                    Spacer()
-                }
-                .frame(width: geometry.width * 0.4)
-                Text(self.country.totalCases.formatted)
-                    .frame(width: geometry.width * 0.2)
-                Text(self.country.activeCases.formatted)
-                    .frame(width: geometry.width * 0.2)
-                Text(self.country.recoveredCases.formatted)
-                    .frame(width: geometry.width * 0.2)
-            }
-        }
-    }
-}
-
 extension Int {
     var formatted: String {
         if self < 1000 { return "\(self)" }
@@ -254,51 +164,6 @@ extension Int {
 struct CountryList_Previews: PreviewProvider {
     static var previews: some View {
         CountryList().sectionHeader
-//        CountryRow(country: Model.country)
-    }
-}
-
-public struct SearchField: View {
-    @Binding var searchText: String
-    @State private var showCancelButton: Bool = false
-
-    public init(searchText: Binding<String>) {
-        self._searchText = searchText
-    }
-    
-    public var body: some View {
-        HStack {
-            HStack {
-                Image(systemName: "magnifyingglass")
-
-                TextField("Search", text: $searchText, onEditingChanged: { isEditing in
-                    self.showCancelButton = true
-                }, onCommit: {
-                    print("onCommit")
-                }).foregroundColor(.primary)
-
-                Button(action: {
-                    self.searchText = ""
-                }) {
-                    Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
-                }
-            }
-            .padding(EdgeInsets(top: .small, leading: .small * 0.75, bottom: .small, trailing: .small * 0.75))
-            .foregroundColor(.secondary)
-            .background(Color(.secondarySystemGroupedBackground))
-            .cornerRadius(.small)
-
-            if showCancelButton  {
-                Button("Cancel") {
-                        UIApplication.dismissKeyboard() // this must be placed before the other commands here
-                        self.searchText = ""
-                        self.showCancelButton = false
-                }
-                .foregroundColor(Color(.systemBlue))
-                .animation(.easeInOut)
-            }
-        }
-        .animation(.easeInOut)
-        .padding(.horizontal)
+//        LocationRow(country: Model.country)
     }
 }

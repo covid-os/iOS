@@ -19,6 +19,8 @@
 		A853A2B82436F105002FDC8E /* CountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2B72436F105002FDC8E /* CountryList.swift */; };
 		A85B78FC2436F27300AE9687 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B78FB2436F27300AE9687 /* Model.swift */; };
 		A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8792DED243799BA00DE61CA /* CountryDetail.swift */; };
+		A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A081243C013D007F99E5 /* LocationViews.swift */; };
+		A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A083243C070A007F99E5 /* CustomViews.swift */; };
 		A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECCE0D2438651400DE57B5 /* Common.swift */; };
 		A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */ = {isa = PBXBuildFile; fileRef = A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		A853A2B72436F105002FDC8E /* CountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryList.swift; sourceTree = "<group>"; };
 		A85B78FB2436F27300AE9687 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		A8792DED243799BA00DE61CA /* CountryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetail.swift; sourceTree = "<group>"; };
+		A8D1A081243C013D007F99E5 /* LocationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViews.swift; sourceTree = "<group>"; };
+		A8D1A083243C070A007F99E5 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		A8ECCE0D2438651400DE57B5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_countries_data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +135,8 @@
 			children = (
 				A853A2B72436F105002FDC8E /* CountryList.swift */,
 				A8792DED243799BA00DE61CA /* CountryDetail.swift */,
+				A8D1A081243C013D007F99E5 /* LocationViews.swift */,
+				A8D1A083243C070A007F99E5 /* CustomViews.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,6 +275,8 @@
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
 				A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */,
 				A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */,
+				A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */,
+				A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

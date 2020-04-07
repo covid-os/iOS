@@ -62,8 +62,6 @@ class Country: Codable, Location {
     let newConfirmed, totalCases, newDeaths, totalDeaths: Int
     let newRecovered, recoveredCases: Int
     
-    var id: String { code }
-    
     enum CodingKeys: String, CodingKey {
         case name = "Country"
         case slug = "Slug"

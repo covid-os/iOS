@@ -87,7 +87,6 @@ class Statewise: Codable, Location {
     var activeCases: Int { active.number }
     var totalCases: Int { confirmed.number }
     var recoveredCases: Int { recovered.number }
-    var id: String { code }
     
     init(active: String, confirmed: String, deaths: String, //delta: Delta,
 //         deltaconfirmed: String, deltadeaths: String, deltarecovered: String,
