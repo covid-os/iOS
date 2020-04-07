@@ -18,6 +18,38 @@
             endingLineNumber = "26"
             landmarkName = "updateStates()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A - dd6af05e7568bfda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.ContentView.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A - dd6af05e7568bfda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.ContentView.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "200">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

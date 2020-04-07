@@ -10,6 +10,8 @@
 		5EB0363661DF2A58F39ACF42 /* Pods_CovidCases.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */; };
 		A80712F12436FACF0068E6C5 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80712F02436FACF0068E6C5 /* CCRequest.swift */; };
 		A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B44B8243AE27600AACAF5 /* IndiaModel.swift */; };
+		A8507547243C629C00C95754 /* INStatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8507546243C629C00C95754 /* INStatesList.swift */; };
+		A850754A243C62FA00C95754 /* LocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8507549243C62FA00C95754 /* LocationProtocol.swift */; };
 		A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A22436F0CF002FDC8E /* AppDelegate.swift */; };
 		A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A42436F0CF002FDC8E /* SceneDelegate.swift */; };
 		A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A62436F0CF002FDC8E /* ContentView.swift */; };
@@ -21,6 +23,7 @@
 		A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8792DED243799BA00DE61CA /* CountryDetail.swift */; };
 		A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A081243C013D007F99E5 /* LocationViews.swift */; };
 		A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A083243C070A007F99E5 /* CustomViews.swift */; };
+		A8D1A086243C0B36007F99E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A085243C0B36007F99E5 /* HomeView.swift */; };
 		A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECCE0D2438651400DE57B5 /* Common.swift */; };
 		A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */ = {isa = PBXBuildFile; fileRef = A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */; };
 /* End PBXBuildFile section */
@@ -31,6 +34,8 @@
 		976AAB899D99CCFB3980B38A /* Pods-CovidCases.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidCases.debug.xcconfig"; path = "Target Support Files/Pods-CovidCases/Pods-CovidCases.debug.xcconfig"; sourceTree = "<group>"; };
 		A80712F02436FACF0068E6C5 /* CCRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
 		A83B44B8243AE27600AACAF5 /* IndiaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaModel.swift; sourceTree = "<group>"; };
+		A8507546243C629C00C95754 /* INStatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INStatesList.swift; sourceTree = "<group>"; };
+		A8507549243C62FA00C95754 /* LocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProtocol.swift; sourceTree = "<group>"; };
 		A853A29F2436F0CF002FDC8E /* COVID Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A853A2A22436F0CF002FDC8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A853A2A42436F0CF002FDC8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 		A8792DED243799BA00DE61CA /* CountryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetail.swift; sourceTree = "<group>"; };
 		A8D1A081243C013D007F99E5 /* LocationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViews.swift; sourceTree = "<group>"; };
 		A8D1A083243C070A007F99E5 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
+		A8D1A085243C0B36007F99E5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A8ECCE0D2438651400DE57B5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_countries_data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +72,22 @@
 				741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A8507545243C628900C95754 /* India */ = {
+			isa = PBXGroup;
+			children = (
+				A8507546243C629C00C95754 /* INStatesList.swift */,
+			);
+			path = India;
+			sourceTree = "<group>";
+		};
+		A8507548243C62E800C95754 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A8507549243C62FA00C95754 /* LocationProtocol.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A853A2962436F0CF002FDC8E = {
@@ -123,9 +145,10 @@
 		A85B78F92436F24D00AE9687 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A8507548243C62E800C95754 /* Model */,
+				A83B44B8243AE27600AACAF5 /* IndiaModel.swift */,
 				A85B78FB2436F27300AE9687 /* Model.swift */,
 				A80712F02436FACF0068E6C5 /* CCRequest.swift */,
-				A83B44B8243AE27600AACAF5 /* IndiaModel.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -133,10 +156,12 @@
 		A85B78FA2436F25300AE9687 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A8507545243C628900C95754 /* India */,
 				A853A2B72436F105002FDC8E /* CountryList.swift */,
 				A8792DED243799BA00DE61CA /* CountryDetail.swift */,
 				A8D1A081243C013D007F99E5 /* LocationViews.swift */,
 				A8D1A083243C070A007F99E5 /* CustomViews.swift */,
+				A8D1A085243C0B36007F99E5 /* HomeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -267,6 +292,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */,
+				A8507547243C629C00C95754 /* INStatesList.swift in Sources */,
+				A850754A243C62FA00C95754 /* LocationProtocol.swift in Sources */,
 				A85B78FC2436F27300AE9687 /* Model.swift in Sources */,
 				A80712F12436FACF0068E6C5 /* CCRequest.swift in Sources */,
 				A853A2B82436F105002FDC8E /* CountryList.swift in Sources */,
@@ -275,6 +302,7 @@
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
 				A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */,
 				A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */,
+				A8D1A086243C0B36007F99E5 /* HomeView.swift in Sources */,
 				A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */,
 				A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */,
 			);

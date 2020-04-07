@@ -34,15 +34,18 @@ class Model {
 
 // MARK: - Welcome
 class CountryData: Codable {
+    let global: Global
     let countries: [Country]
     let dateString: String
     
     enum CodingKeys: String, CodingKey {
+        case global = "Global"
         case countries = "Countries"
         case dateString = "Date"
     }
-    
-    init(countries: [Country], date: String) {
+
+    init(global: Global, countries: [Country], date: String) {
+        self.global = global
         self.countries = countries
         self.dateString = date
     }
@@ -54,6 +57,42 @@ class CountryData: Codable {
     }
     
     var lastUpdatedTime: Date? { dateString.date }
+}
+
+class Global: Codable, Location {
+    var name: String { "World "}
+    
+    var code: String { "homeLocation" }
+    
+    
+    var newConfirmed, totalCases, newDeaths, totalDeaths: Int
+    var newRecovered, recoveredCases: Int
+
+    enum CodingKeys: String, CodingKey {
+        case newConfirmed = "NewConfirmed"
+        case totalCases = "TotalConfirmed"
+        case newDeaths = "NewDeaths"
+        case totalDeaths = "TotalDeaths"
+        case newRecovered = "NewRecovered"
+        case recoveredCases = "TotalRecovered"
+    }
+
+    init(newConfirmed: Int, totalConfirmed: Int, newDeaths: Int, totalDeaths: Int, newRecovered: Int, totalRecovered: Int) {
+        self.newConfirmed = newConfirmed
+        self.totalCases = totalConfirmed
+        self.newDeaths = newDeaths
+        self.totalDeaths = totalDeaths
+        self.newRecovered = newRecovered
+        self.recoveredCases = totalRecovered
+    }
+    
+    var activeCases: Int { totalCases - recoveredCases }
+    
+    var asCountry: Country {
+        Country(country: "World", slug: "world", code: "globe", dateString: "", newConfirmed: self.newConfirmed,
+                totalConfirmed: self.totalCases, newDeaths: self.newDeaths, totalDeaths: self.totalDeaths,
+                newRecovered: self.newRecovered, totalRecovered: self.recoveredCases)
+    }
 }
 
 // MARK: - Country
@@ -94,22 +133,14 @@ class Country: Codable, Location {
     var activeCases: Int { totalCases - recoveredCases - totalDeaths }
     //    var newActiveCases: Int { newConfirmed  - newRecovered - newDeaths }
     
-    var activePercentage: String { getPercent(of: activeCases) }
-    var recoveredPercent: String { getPercent(of: recoveredCases) }
-    var diedPercentage: String { getPercent(of: totalDeaths) }
     var newCasesPercent: String { getPercent(of: newConfirmed) }
 //    var newRecoveredPercent: String { getPercent(of: newRecovered) }
     var newDeathsPercent: String { getPercent(of: newDeaths) }
     
-    func getPercent(of count: Int) -> String {
-        let percent = Double(count) / Double(totalCases)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        return formatter.string(from: NSNumber(value: percent)) ?? String(format: "%.2f%%", percent)
-    }
 }
 
 class CountriesStore {
+    
     static var savedInDocs: CountryData? {
         return FileIO.shared.getOjbectFromFile(named: "covid-store", withType: .json)
     }
@@ -124,13 +155,24 @@ class CountriesStore {
     
     static var data: CountryData {
         if let data = CountriesStore.savedInDocs {
+            world = data.global
             return data
         }
         
         let data = CountriesStore.loadedFromBundle
         
         data.updateTime()
-        
+
+        world = data.global
         return data
+    }
+    
+    static var world = Global(newConfirmed: 106598, totalConfirmed: 1252421, newDeaths: 5972,
+                              totalDeaths: 67572, newRecovered: 28514, totalRecovered: 259047)
+    
+    static var initialCountries: [Country] {
+        var set = Set<String>()
+        return CountriesStore.data.countries
+        .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
     }
 }

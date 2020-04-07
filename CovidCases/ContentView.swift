@@ -14,7 +14,8 @@ struct ContentView: View {
     let getStates = GetObject<India>()
     
     var body: some View {
-        CountryList()
+        HomeView()
+//        CountryList()
 //        CountryDetail(country: Model.country)
 //        Text("India").onAppear(perform: updateStates)
     }

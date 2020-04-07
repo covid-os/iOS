@@ -53,6 +53,61 @@ public struct SearchField: View {
     }
 }
 
+struct ItemSection: View {
+    let title: String
+    let count: Int
+    var color: Color = .primary
+    var percentage: String
+    
+    var body: some View {
+        Section {
+            ItemRow(title: title, count: count,
+                    color: color, percentage: percentage)
+        }
+    }
+}
+
+
+struct ItemRow: View {
+    let title: String
+    let count: Int
+    var color: Color = .primary
+    var percentage: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            numberStack
+        }.frame(minHeight: .averageTouchSize * 2)
+    }
+    
+    var numberStack: some View {
+        VStack(alignment: .trailing, spacing: .small) {
+            Spacer()
+            Text("\(count)")
+                .font(.title)
+            Text(percentage)
+        }
+        .foregroundColor(color)
+    }
+}
+
+struct CenteredHeaderFooter: View {
+    let text: String
+    
+    init(_ text: String) {
+        self.text = text
+    }
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(text)
+            Spacer()
+        }
+    }
+}
 
 //struct CustomViews_Previews: PreviewProvider {
 //    static var previews: some View {

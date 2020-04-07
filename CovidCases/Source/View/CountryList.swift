@@ -15,102 +15,17 @@ struct CountryList: View {
     @ObservedObject var device: Device = Device.shared
     
     @State private var displayedCountries: [Country] = []
-    @State private var storedCountries: [Country] = Self.filteredCountries
+    @State private var storedCountries: [Country] = CountriesStore.initialCountries
     @State private var searchText: String = ""
     @State private var sortedBy: LocationSorter = .total
+    @State var world: Country = CountriesStore.world.asCountry
     
-    static var filteredCountries: [Country] {
-        var set = Set<String>()
-        return CountriesStore.data.countries
-        .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
-    }
-    
-    var getCountries = GetObject<CountryData>()
+    let getCountries = GetObject<CountryData>()
     
     var body: some View {
-        myView
-    }
-    
-    var myView: some View {
-      if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
-          return AnyView(navView.navigationViewStyle(StackNavigationViewStyle()))
-      } else {
-          return AnyView(navView.navigationViewStyle(DoubleColumnNavigationViewStyle()))
-      }
-    }
-    
-    var navView: some View {
-        NavigationView {
-            viewStack
-                .onAppear(perform: autoUpdateCountries)
-                .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
-                .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill",
-                                                          andAction: updateCountries))
-        }
-    }
-    
-    var viewStack: some View {
-        let binding = Binding<String>(
-            get: { self.searchText },
-            set: { self.searchText = $0; self.filterCountries() }
-        )
-        
-        return ZStack {
-            Color(UIColor.systemGroupedBackground)
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                SearchField(searchText: binding).padding(.bottom, .small)
-                listView
-            }
-        }
-    }
-    
-    private var listView: some View {
-        List {
-            section
-        }
-        .listRowInsets(EdgeInsets(top: .small, leading: .small, bottom: .small, trailing: .zero))
-        .introspectTableView { tableView in
-            tableView.tableFooterView = UIView()
-            tableView.keyboardDismissMode = .onDrag
-        }
-    }
-    
-    fileprivate var section: some View {
-        Section(header: sectionHeader.frame(height: .averageTouchSize)) {
-            ForEach(displayedCountries, id: \.code) { country in
-                NavigationLink(destination: CountryDetail(country: country)) {
-                    LocationRow(location: country)
-                }
-            }
-        }
-    }
-    
-    fileprivate var sectionHeader: some View {
-        LocationHeader(currentSorter: $sortedBy, locations: $displayedCountries)
-    }
-    
-//    func setColors(to navigationBar: UINavigationBar) {
-//        let appearance = UINavigationBarAppearance()
-//        appearance.shadowColor = .clear
-//        appearance.backgroundColor = .systemBackground
-//        navigationBar.standardAppearance = appearance
-//        navigationBar.compactAppearance = appearance
-//        navigationBar.scrollEdgeAppearance = appearance
-//    }
-    
-    func autoUpdateCountries() {
-        if displayedCountries.isEmpty {
-            Console.shared.log("showing data for the first time")
-            self.filterCountries()
-        }
-        
-        if let updatedTime = Defaults.updatedTime,
-            Date().timeIntervalSince(updatedTime) < 1799 {
-            return
-        }
-                
-        updateCountries()
+        LocationList(home: $world, searchText: $searchText,
+                     displayedLocations: $displayedCountries, sortedBy: $sortedBy,
+                     updateLocations: updateCountries, filterLocations: filterCountries)
     }
     
     func updateCountries() {
@@ -123,7 +38,7 @@ struct CountryList: View {
                 // TODO: the data conversion operation happens twice in this two lines. can remove once.
                 guard data.lastUpdatedTime != Defaults.updatedTime else { return }
                 data.updateTime()
-                
+                self.world = data.global.asCountry
                 CountriesStore.save(data)
                 var set = Set<String>()
                 self.storedCountries = data.countries
@@ -161,9 +76,10 @@ extension Int {
         
     }
 }
-struct CountryList_Previews: PreviewProvider {
-    static var previews: some View {
-        CountryList().sectionHeader
-//        LocationRow(country: Model.country)
-    }
-}
+
+//struct CountryList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CountryList().sectionHeader
+////        LocationRow(country: Model.country)
+//    }
+//}
