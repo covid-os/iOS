@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5EB0363661DF2A58F39ACF42 /* Pods_CovidCases.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */; };
-		A80712F12436FACF0068E6C5 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80712F02436FACF0068E6C5 /* CCRequest.swift */; };
-		A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B44B8243AE27600AACAF5 /* IndiaModel.swift */; };
+		A80712F12436FACF0068E6C5 /* CountryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80712F02436FACF0068E6C5 /* CountryRequest.swift */; };
+		A83B44B9243AE27600AACAF5 /* INModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B44B8243AE27600AACAF5 /* INModel.swift */; };
 		A8507547243C629C00C95754 /* INStatesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8507546243C629C00C95754 /* INStatesList.swift */; };
 		A850754A243C62FA00C95754 /* LocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8507549243C62FA00C95754 /* LocationProtocol.swift */; };
 		A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2A22436F0CF002FDC8E /* AppDelegate.swift */; };
@@ -19,7 +19,7 @@
 		A853A2AC2436F0D1002FDC8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A853A2AB2436F0D1002FDC8E /* Preview Assets.xcassets */; };
 		A853A2AF2436F0D1002FDC8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A853A2AD2436F0D1002FDC8E /* LaunchScreen.storyboard */; };
 		A853A2B82436F105002FDC8E /* CountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A853A2B72436F105002FDC8E /* CountryList.swift */; };
-		A85B78FC2436F27300AE9687 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B78FB2436F27300AE9687 /* Model.swift */; };
+		A85B78FC2436F27300AE9687 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85B78FB2436F27300AE9687 /* CountryModel.swift */; };
 		A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8792DED243799BA00DE61CA /* CountryDetail.swift */; };
 		A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A081243C013D007F99E5 /* LocationViews.swift */; };
 		A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A083243C070A007F99E5 /* CustomViews.swift */; };
@@ -32,8 +32,8 @@
 		3804F42DC433F989862DB683 /* Pods-CovidCases.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidCases.release.xcconfig"; path = "Target Support Files/Pods-CovidCases/Pods-CovidCases.release.xcconfig"; sourceTree = "<group>"; };
 		741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CovidCases.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		976AAB899D99CCFB3980B38A /* Pods-CovidCases.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidCases.debug.xcconfig"; path = "Target Support Files/Pods-CovidCases/Pods-CovidCases.debug.xcconfig"; sourceTree = "<group>"; };
-		A80712F02436FACF0068E6C5 /* CCRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
-		A83B44B8243AE27600AACAF5 /* IndiaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndiaModel.swift; sourceTree = "<group>"; };
+		A80712F02436FACF0068E6C5 /* CountryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRequest.swift; sourceTree = "<group>"; };
+		A83B44B8243AE27600AACAF5 /* INModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INModel.swift; sourceTree = "<group>"; };
 		A8507546243C629C00C95754 /* INStatesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INStatesList.swift; sourceTree = "<group>"; };
 		A8507549243C62FA00C95754 /* LocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProtocol.swift; sourceTree = "<group>"; };
 		A853A29F2436F0CF002FDC8E /* COVID Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,7 +45,7 @@
 		A853A2AE2436F0D1002FDC8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A853A2B02436F0D1002FDC8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A853A2B72436F105002FDC8E /* CountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryList.swift; sourceTree = "<group>"; };
-		A85B78FB2436F27300AE9687 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		A85B78FB2436F27300AE9687 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		A8792DED243799BA00DE61CA /* CountryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetail.swift; sourceTree = "<group>"; };
 		A8D1A081243C013D007F99E5 /* LocationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViews.swift; sourceTree = "<group>"; };
 		A8D1A083243C070A007F99E5 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
@@ -72,22 +72,6 @@
 				741F2D95BF153C37CCC4994C /* Pods_CovidCases.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A8507545243C628900C95754 /* India */ = {
-			isa = PBXGroup;
-			children = (
-				A8507546243C629C00C95754 /* INStatesList.swift */,
-			);
-			path = India;
-			sourceTree = "<group>";
-		};
-		A8507548243C62E800C95754 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				A8507549243C62FA00C95754 /* LocationProtocol.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		A853A2962436F0CF002FDC8E = {
@@ -135,35 +119,51 @@
 		A853A2B62436F0ED002FDC8E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A8A28345243CDAEE00B347CB /* Location */,
+				A8A28344243CDAE600B347CB /* India */,
+				A8A28343243CDADA00B347CB /* World */,
 				A85B78FA2436F25300AE9687 /* View */,
-				A85B78F92436F24D00AE9687 /* Data */,
 				A8ECCE0D2438651400DE57B5 /* Common.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		A85B78F92436F24D00AE9687 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				A8507548243C62E800C95754 /* Model */,
-				A83B44B8243AE27600AACAF5 /* IndiaModel.swift */,
-				A85B78FB2436F27300AE9687 /* Model.swift */,
-				A80712F02436FACF0068E6C5 /* CCRequest.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		A85B78FA2436F25300AE9687 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A8507545243C628900C95754 /* India */,
-				A853A2B72436F105002FDC8E /* CountryList.swift */,
-				A8792DED243799BA00DE61CA /* CountryDetail.swift */,
-				A8D1A081243C013D007F99E5 /* LocationViews.swift */,
 				A8D1A083243C070A007F99E5 /* CustomViews.swift */,
 				A8D1A085243C0B36007F99E5 /* HomeView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		A8A28343243CDADA00B347CB /* World */ = {
+			isa = PBXGroup;
+			children = (
+				A80712F02436FACF0068E6C5 /* CountryRequest.swift */,
+				A85B78FB2436F27300AE9687 /* CountryModel.swift */,
+				A853A2B72436F105002FDC8E /* CountryList.swift */,
+				A8792DED243799BA00DE61CA /* CountryDetail.swift */,
+			);
+			path = World;
+			sourceTree = "<group>";
+		};
+		A8A28344243CDAE600B347CB /* India */ = {
+			isa = PBXGroup;
+			children = (
+				A83B44B8243AE27600AACAF5 /* INModel.swift */,
+				A8507546243C629C00C95754 /* INStatesList.swift */,
+			);
+			path = India;
+			sourceTree = "<group>";
+		};
+		A8A28345243CDAEE00B347CB /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				A8507549243C62FA00C95754 /* LocationProtocol.swift */,
+				A8D1A081243C013D007F99E5 /* LocationViews.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		E0DF1D4259BF56B3C4AF1B7A /* Pods */ = {
@@ -294,14 +294,14 @@
 				A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */,
 				A8507547243C629C00C95754 /* INStatesList.swift in Sources */,
 				A850754A243C62FA00C95754 /* LocationProtocol.swift in Sources */,
-				A85B78FC2436F27300AE9687 /* Model.swift in Sources */,
-				A80712F12436FACF0068E6C5 /* CCRequest.swift in Sources */,
+				A85B78FC2436F27300AE9687 /* CountryModel.swift in Sources */,
+				A80712F12436FACF0068E6C5 /* CountryRequest.swift in Sources */,
 				A853A2B82436F105002FDC8E /* CountryList.swift in Sources */,
 				A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */,
 				A8792DEE243799BA00DE61CA /* CountryDetail.swift in Sources */,
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
 				A853A2A72436F0CF002FDC8E /* ContentView.swift in Sources */,
-				A83B44B9243AE27600AACAF5 /* IndiaModel.swift in Sources */,
+				A83B44B9243AE27600AACAF5 /* INModel.swift in Sources */,
 				A8D1A086243C0B36007F99E5 /* HomeView.swift in Sources */,
 				A8D1A084243C070A007F99E5 /* CustomViews.swift in Sources */,
 				A8D1A082243C013D007F99E5 /* LocationViews.swift in Sources */,

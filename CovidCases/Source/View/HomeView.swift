@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-let countryList = CountryList()
-
 struct HomeView: View {
     
     
@@ -17,7 +15,7 @@ struct HomeView: View {
 //        NavigationView {
             TabView {
                 NavigationView {
-                    getList()
+                    CountryList()
                 }
                 
 //                .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
@@ -33,11 +31,6 @@ struct HomeView: View {
             }.edgesIgnoringSafeArea(.top)
 //        }
         
-    }
-    
-    func getList() -> some View {
-        print(countryList)
-        return countryList
     }
 }
 
