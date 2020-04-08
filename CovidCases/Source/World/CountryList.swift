@@ -13,12 +13,17 @@ import MINetworkKit
 struct CountryList: View {
     
     @State private var displayedCountries: [Country] = []
-    @State private var storedCountries: [Country] = CountriesStore.initialCountries
+    @State private var storedCountries: [Country]// = CountriesStore.initialCountries
     @State private var searchText: String = ""
     @State private var sortedBy: LocationSorter = .total
-    @State var world: Country = CountriesStore.world.asCountry
+    @State var world: Country// = CountriesStore.world.asCountry
     
     let getCountries = GetObject<CountryData>()
+    
+    init(data: CountryData) {
+        _storedCountries = State(initialValue: data.initialCountries)
+        _world = State(initialValue: data.global.asCountry)
+    }
     
     var body: some View {
         LocationList(home: $world, searchText: $searchText,

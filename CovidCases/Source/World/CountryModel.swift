@@ -57,6 +57,11 @@ class CountryData: Codable {
     }
     
     var lastUpdatedTime: Date? { dateString.toDate(fromFormat: .jhuDateFormat) }
+    
+    var initialCountries: [Country] {
+        var set = Set<String>()
+        return countries.filter({ $0.totalCases > 0 && set.insert($0.code).0 })
+    }
 }
 
 class Global: Codable, MaxLocation {
@@ -174,9 +179,9 @@ class CountriesStore {
     static var world = Global(newConfirmed: 106598, totalConfirmed: 1252421, newDeaths: 5972,
                               totalDeaths: 67572, newRecovered: 28514, totalRecovered: 259047)
     
-    static var initialCountries: [Country] {
-        var set = Set<String>()
-        return CountriesStore.data.countries
-        .filter({ $0.totalCases > 0 && set.insert($0.code).0 })
-    }
+//    static var initialCountries: [Country] {
+//        var set = Set<String>()
+//        return CountriesStore.data.countries
+//        .filter({ $0.totalCases > 0 && set.insert($0.code).0 })
+//    }
 }

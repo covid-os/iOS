@@ -30,6 +30,7 @@
 		A8D1A086243C0B36007F99E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D1A085243C0B36007F99E5 /* HomeView.swift */; };
 		A8ECCE0E2438651400DE57B5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ECCE0D2438651400DE57B5 /* Common.swift */; };
 		A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */ = {isa = PBXBuildFile; fileRef = A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */; };
+		A8F218FA243E155600D1C3A6 /* Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F218F9243E155600D1C3A6 /* Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		A8D1A085243C0B36007F99E5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A8ECCE0D2438651400DE57B5 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_countries_data.json; sourceTree = "<group>"; };
+		A8F218F9243E155600D1C3A6 /* Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,19 +134,20 @@
 				A8A28345243CDAEE00B347CB /* Location */,
 				A8A28344243CDAE600B347CB /* India */,
 				A8A28343243CDADA00B347CB /* World */,
-				A85B78FA2436F25300AE9687 /* View */,
-				A8ECCE0D2438651400DE57B5 /* Common.swift */,
+				A85B78FA2436F25300AE9687 /* Shared */,
+				A8F218F9243E155600D1C3A6 /* Ext.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		A85B78FA2436F25300AE9687 /* View */ = {
+		A85B78FA2436F25300AE9687 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A8ECCE0D2438651400DE57B5 /* Common.swift */,
 				A8D1A083243C070A007F99E5 /* CustomViews.swift */,
 				A8D1A085243C0B36007F99E5 /* HomeView.swift */,
 			);
-			path = View;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		A8A28343243CDADA00B347CB /* World */ = {
@@ -310,6 +313,7 @@
 				A850754A243C62FA00C95754 /* LocationProtocol.swift in Sources */,
 				A85B78FC2436F27300AE9687 /* CountryModel.swift in Sources */,
 				A80712F12436FACF0068E6C5 /* CountryRequest.swift in Sources */,
+				A8F218FA243E155600D1C3A6 /* Ext.swift in Sources */,
 				A853A2B82436F105002FDC8E /* CountryList.swift in Sources */,
 				A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */,
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
