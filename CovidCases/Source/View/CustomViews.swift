@@ -24,7 +24,7 @@ public struct SearchField: View {
                 TextField("Search", text: $searchText, onEditingChanged: { isEditing in
                     self.showCancelButton = true
                 }, onCommit: {
-                    print("onCommit")
+                    Console.shared.log("onCommit")
                 }).foregroundColor(.primary)
 
                 Button(action: {
@@ -60,6 +60,14 @@ struct ItemSection: View {
     var percentage: String
     
     var body: some View {
+        if count == 0 {
+            return AnyView(EmptyView())
+        }
+        
+        return AnyView(section)
+    }
+    
+    var section: some View {
         Section {
             ItemRow(title: title, count: count,
                     color: color, percentage: percentage)
@@ -75,6 +83,14 @@ struct ItemRow: View {
     var percentage: String
     
     var body: some View {
+        if count == 0 {
+            return AnyView(EmptyView())
+        }
+        
+        return AnyView(row)
+    }
+    
+    var row: some View {
         HStack {
             Text(title)
             Spacer()
@@ -105,6 +121,18 @@ struct CenteredHeaderFooter: View {
             Spacer()
             Text(text)
             Spacer()
+        }
+    }
+}
+
+public struct InfoFooter: View {
+    let texts: [String]
+    
+    public var body: some View {
+        GeometryReader { geometry in
+            VStack(spacing: .medium) {
+                ForEach(self.texts, id: \.self) { Text($0)}
+            }.frame(width: geometry.width)
         }
     }
 }

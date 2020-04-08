@@ -21,7 +21,7 @@ struct HomeView: View {
 //                .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
                     .tabItem { Image(systemName: "globe") }
                 NavigationView {
-                    Text("Country")
+                    INStatesList()
                 }
                     .tabItem { Image(systemName: "mappin.and.ellipse") }
                 NavigationView {

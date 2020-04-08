@@ -7,49 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A"
+            uuid = "CDDF1CCB-4B4D-4024-8B78-8F6F83D2EA7B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CovidCases/ContentView.swift"
+            filePath = "CovidCases/Source/India/INStateDetail.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "updateStates()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A - dd6af05e7568bfda"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.ContentView.updateStates() -&gt; ()"
-                  moduleName = "COVID Stats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "164">
-               </Location>
-               <Location
-                  uuid = "BAB7E292-22C9-4034-B700-1BE7E062019A - dd6af05e7568bfda"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.ContentView.updateStates() -&gt; ()"
-                  moduleName = "COVID Stats"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/ContentView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "200">
-               </Location>
-            </Locations>
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D109D86-515C-48CA-AD97-9D47219EB871"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "INState"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C5671BB-6EB2-45EA-951D-614384C1F84E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "INState"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F45E075A-39FC-41A5-A627-B8191060ABA6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "allData"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

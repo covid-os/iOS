@@ -52,35 +52,31 @@ class CountryData: Codable {
     
     func updateTime() {
         if let time = lastUpdatedTime {
-            Defaults.updatedTime = time
+            Defaults.countriesUpdatedTime = time
         }
     }
     
-    var lastUpdatedTime: Date? { dateString.date }
+    var lastUpdatedTime: Date? { dateString.toDate(fromFormat: .jhuDateFormat) }
 }
 
-class Global: Codable, Location {
-    var name: String { "World "}
+class Global: Codable, MaxLocation {
     
-    var code: String { "homeLocation" }
-    
-    
-    var newConfirmed, totalCases, newDeaths, totalDeaths: Int
+    var recentCases, totalCases, recentDeaths, totalDeaths: Int
     var newRecovered, recoveredCases: Int
 
     enum CodingKeys: String, CodingKey {
-        case newConfirmed = "NewConfirmed"
+        case recentCases = "NewConfirmed"
         case totalCases = "TotalConfirmed"
-        case newDeaths = "NewDeaths"
+        case recentDeaths = "NewDeaths"
         case totalDeaths = "TotalDeaths"
         case newRecovered = "NewRecovered"
         case recoveredCases = "TotalRecovered"
     }
 
     init(newConfirmed: Int, totalConfirmed: Int, newDeaths: Int, totalDeaths: Int, newRecovered: Int, totalRecovered: Int) {
-        self.newConfirmed = newConfirmed
+        self.recentCases = newConfirmed
         self.totalCases = totalConfirmed
-        self.newDeaths = newDeaths
+        self.recentDeaths = newDeaths
         self.totalDeaths = totalDeaths
         self.newRecovered = newRecovered
         self.recoveredCases = totalRecovered
@@ -89,16 +85,22 @@ class Global: Codable, Location {
     var activeCases: Int { totalCases - recoveredCases }
     
     var asCountry: Country {
-        Country(country: "World", slug: "world", code: "globe", dateString: "", newConfirmed: self.newConfirmed,
-                totalConfirmed: self.totalCases, newDeaths: self.newDeaths, totalDeaths: self.totalDeaths,
+        Country(country: "World", slug: "world", code: "globe", dateString: "", newConfirmed: self.recentCases,
+                totalConfirmed: self.totalCases, newDeaths: self.recentDeaths, totalDeaths: self.totalDeaths,
                 newRecovered: self.newRecovered, totalRecovered: self.recoveredCases)
     }
+    
+    var name: String { "World "}
+    
+    var code: String { "homeLocation" }
+    
+    var updatedTime: Date? { Defaults.countriesUpdatedTime }
 }
 
 // MARK: - Country
-class Country: Codable, Location {
+class Country: Codable, MaxLocation {
     let name, slug, code, dateString: String
-    let newConfirmed, totalCases, newDeaths, totalDeaths: Int
+    let recentCases, totalCases, recentDeaths, totalDeaths: Int
     let newRecovered, recoveredCases: Int
     
     enum CodingKeys: String, CodingKey {
@@ -106,9 +108,9 @@ class Country: Codable, Location {
         case slug = "Slug"
         case code = "CountryCode"
         case dateString = "Date"
-        case newConfirmed = "NewConfirmed"
+        case recentCases = "NewConfirmed"
         case totalCases = "TotalConfirmed"
-        case newDeaths = "NewDeaths"
+        case recentDeaths = "NewDeaths"
         case totalDeaths = "TotalDeaths"
         case newRecovered = "NewRecovered"
         case recoveredCases = "TotalRecovered"
@@ -122,20 +124,22 @@ class Country: Codable, Location {
         self.slug = slug
         self.code = code
         self.dateString = dateString
-        self.newConfirmed = newConfirmed
+        self.recentCases = newConfirmed
         self.totalCases = totalConfirmed
-        self.newDeaths = newDeaths
+        self.recentDeaths = newDeaths
         self.totalDeaths = totalDeaths
         self.newRecovered = newRecovered
         self.recoveredCases = totalRecovered
     }
     
     var activeCases: Int { totalCases - recoveredCases - totalDeaths }
+    
+    var updatedTime: Date? { dateString.toDate(fromFormat: .jhuDateFormat) }
     //    var newActiveCases: Int { newConfirmed  - newRecovered - newDeaths }
     
-    var newCasesPercent: String { getPercent(of: newConfirmed) }
+//    var recentCasesPercent: String { getPercent(of: recentCases) }
 //    var newRecoveredPercent: String { getPercent(of: newRecovered) }
-    var newDeathsPercent: String { getPercent(of: newDeaths) }
+//    var recentDeathsPercent: String { getPercent(of: recentDeaths) }
     
 }
 
@@ -173,6 +177,6 @@ class CountriesStore {
     static var initialCountries: [Country] {
         var set = Set<String>()
         return CountriesStore.data.countries
-        .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
+        .filter({ $0.totalCases > 0 && set.insert($0.code).0 })
     }
 }

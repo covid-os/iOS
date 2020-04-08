@@ -25,10 +25,32 @@ extension Location {
     var diedPercent: String { getPercent(of: totalDeaths) }
     
     func getPercent(of count: Int) -> String {
+        guard totalCases > 0 else { return "" }
+        
         let percent = Double(count) / Double(totalCases)
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         return formatter.string(from: NSNumber(value: percent)) ?? String(format: "%.2f%%", percent)
+    }
+}
+
+// conform to this protocol if the location has all the required properties
+protocol MaxLocation: Location {
+    var recentCases: Int { get }
+    var recentDeaths: Int { get }
+    var updatedTime: Date? { get }
+}
+
+extension MaxLocation {
+    var recentCasesPercent: String { getPercent(of: recentCases) }
+    var recentDeathsPercent: String { getPercent(of: recentDeaths) }
+    
+    var displayUpdateTime: String {
+        if let time = updatedTime {
+            return "Last updated: " + time.toString(inFormat: .displayDateFormat)
+        }
+        
+        return ""
     }
 }
 

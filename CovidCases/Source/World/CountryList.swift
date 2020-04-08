@@ -12,8 +12,6 @@ import MINetworkKit
 
 struct CountryList: View {
     
-    @ObservedObject var device: Device = Device.shared
-    
     @State private var displayedCountries: [Country] = []
     @State private var storedCountries: [Country] = CountriesStore.initialCountries
     @State private var searchText: String = ""
@@ -26,17 +24,18 @@ struct CountryList: View {
         LocationList(home: $world, searchText: $searchText,
                      displayedLocations: $displayedCountries, sortedBy: $sortedBy,
                      updateLocations: updateCountries, filterLocations: filterCountries)
+                     .navigationBarTitle("COVID-19 Global Statistics", displayMode: .inline)
     }
     
     func updateCountries() {
-        print("making API requst")
+        Console.shared.log("making API requst")
         getCountries.execute(CCRequest.countryList) { result in
             switch result {
             case .success(let data):
-                print("API requst success")
+                Console.shared.log("API requst success")
                 
                 // TODO: the data conversion operation happens twice in this two lines. can remove once.
-                guard data.lastUpdatedTime != Defaults.updatedTime else { return }
+                guard data.lastUpdatedTime != Defaults.countriesUpdatedTime else { return }
                 data.updateTime()
                 self.world = data.global.asCountry
                 CountriesStore.save(data)
@@ -45,7 +44,7 @@ struct CountryList: View {
                     .filter({ $0.totalCases > 0 && set.insert($0.slug).0 })
                 self.filterCountries()
             case .failure(let error):
-                print(error)
+                "\(error)".log()
             }
         }
     }
@@ -62,18 +61,12 @@ struct CountryList: View {
     }
 }
 
-extension Int {
-    var formatted: String {
-        if self < 1000 { return "\(self)" }
-        
-        let thousands = Double(self)/1000
-        
-        if thousands < 1000 {
-            return String(format: "%.1f", thousands) + " K"
-        }
-        
-        return String(format: "%.1f", thousands/1000) + " M"
-        
+struct CountryDetail: View {
+    let country: Country
+    var footerInfo: [String] = []
+    
+    var body: some View {
+        MaxLocationDetail(location: country, footerInfo: ["Source: covid19api.com"])
     }
 }
 

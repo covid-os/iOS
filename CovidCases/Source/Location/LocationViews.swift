@@ -10,15 +10,18 @@ import SwiftUI
 
 struct LocationList<T: Location>: View {
     
+    @ObservedObject var device: Device = Device.shared
+    
     @Binding var home: T
     @Binding var searchText: String
     @Binding var displayedLocations: [T]
     @Binding var sortedBy: LocationSorter
     
+    var updateInterval: Double = 1799
+    
     let updateLocations: () -> Void
     let filterLocations: () -> Void
     
-    @ObservedObject var device: Device = Device.shared
     
     var tempLocations: [T] { [home] + displayedLocations }
     
@@ -37,8 +40,7 @@ struct LocationList<T: Location>: View {
     var navView: some View {
         //        NavigationView {
         viewStack
-            .onAppear(perform: autoUpdateCountries)
-            .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
+            .onAppear(perform: autoUpdateLocations)
             .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill",
                                                       andAction: updateLocations))
         //        }
@@ -82,25 +84,31 @@ struct LocationList<T: Location>: View {
     }
     
     func getDetailView(for location: Location) -> some View{
-        if let country = location as? Country {
+        if location.totalCases == 0 {
+            return AnyView(NoCaseView(location: location))
+        } else if let country = location as? Country {
             return AnyView(CountryDetail(country: country))
+        } else if let indianState = location as? INState {
+            return AnyView(INStateDetail(state: indianState))
+        } else if let maxLocation = location as? MaxLocation {
+            return AnyView(MaxLocationDetail(location: maxLocation))
         }
         
-        return AnyView(LocationDetail(location: location))
+        return AnyView(MinLocationDetail(location: location))
     }
     
     fileprivate var sectionHeader: some View {
         LocationHeader(currentSorter: $sortedBy, locations: $displayedLocations)
     }
     
-    func autoUpdateCountries() {
+    func autoUpdateLocations() {
         if displayedLocations.isEmpty {
             Console.shared.log("showing data for the first time")
             self.filterLocations()
         }
         
-        if let updatedTime = Defaults.updatedTime,
-            Date().timeIntervalSince(updatedTime) < 1799 {
+        if let updatedTime = Defaults.countriesUpdatedTime,
+            Date().timeIntervalSince(updatedTime) < updateInterval {
             return
         }
         
@@ -108,7 +116,19 @@ struct LocationList<T: Location>: View {
     }
 }
 
-struct LocationDetail: View {
+struct NoCaseView: View {
+    var location: Location
+    
+    var body: some View {
+        Text("No case has been reported in \(location.name). \nStay home. \nStay safe.")
+            .multilineTextAlignment(.center)
+            .navigationBarTitle(location.name)
+    }
+}
+
+// at this point (April 8 - implemented Countries list and Indian states list)
+// this view will be never used
+struct MinLocationDetail: View {
     let location: Location
     
     var body: some View {
@@ -146,13 +166,7 @@ struct LocationDetail: View {
     }
     
     private var footer: some View {
-        GeometryReader { geometry in
-            VStack(spacing: .medium) {
-                Text("App logo from CDC on Unspash")
-                Text("Tweet to the developer @imthath_m")
-                Text("Open sourced at github.com/covid-os/iOS")
-            }.frame(width: geometry.width)
-        }
+        InfoFooter(texts: ["App logo from CDC on Unspash", "Tweet to the developer @imthath_m", "Open sourced at github.com/covid-os/iOS"])
     }
 }
 

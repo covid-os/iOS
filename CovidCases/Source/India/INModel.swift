@@ -12,23 +12,29 @@ import Foundation
 class India: Codable {
 //    let casesTimeSeries: [CasesTimeStamp]
 //    let keyValues: [KeyValue]
-    let statewise: [Statewise]
+    let states: [INState]
 //    let tested: [Tested]
 
     enum CodingKeys: String, CodingKey {
 //        case casesTimeSeries = "cases_time_series"
 //        case keyValues = "key_values"
-        case statewise
+        case states = "statewise"
 //        case tested
     }
 
     init(//casesTimeSeries: [CasesTimeStamp],// keyValues: [KeyValue],
-        statewise: [Statewise]) {//, tested: [Tested]) {
+        statewise: [INState]) {//, tested: [Tested]) {
 //        self.casesTimeSeries = casesTimeSeries
 //        self.keyValues = keyValues
-        self.statewise = statewise
+        self.states = statewise
 //        self.tested = tested
     }
+    
+    var total: INState { states.first(where: { $0.code == "TT" }) ?? IndiaStore.india }
+    
+    var exceptTotal: [INState] { states.filter({ $0.code != "TT" }) }
+    
+    var updateTime: Date { total.dateString.toDate(fromFormat: .indiaDateFormat)! }
 }
 
 // MARK: - CasesTimeSery
@@ -65,18 +71,22 @@ class India: Codable {
 //}
 
 // MARK: - Statewise
-class Statewise: Codable, Location {
+class INState: Codable, MaxLocation {
+    
     let active, confirmed, deaths: String
 //    let delta: Delta
 //    let deltaconfirmed, deltadeaths, deltarecovered: String
+    let deltaconfirmed, deltadeaths: String
     let dateString: String
-    let recovered, name, code: String
+    let recovered, code: String
+    var name: String
 
     enum CodingKeys: String, CodingKey {
         case name = "state"
         case code = "statecode"
         case dateString = "lastupdatedtime"
         case active, confirmed, recovered, deaths
+        case deltaconfirmed, deltadeaths
 //        case activeCases = "active"
 //        case totalCases = "confirmed"
 //        case totalDeaths = "deaths"
@@ -89,15 +99,19 @@ class Statewise: Codable, Location {
     var recoveredCases: Int { recovered.number }
     var totalDeaths: Int { deaths.number }
     
+    var recentCases: Int { deltaconfirmed.number }
+    var recentDeaths: Int { deltadeaths.number }
+    var updatedTime: Date? { dateString.toDate(fromFormat: .indiaDateFormat) }
+    
     init(active: String, confirmed: String, deaths: String, //delta: Delta,
-//         deltaconfirmed: String, deltadeaths: String, deltarecovered: String,
+         deltaconfirmed: String, deltadeaths: String, //deltarecovered: String,
          dateString: String, recovered: String, name: String, code: String) {
         self.active = active
         self.confirmed = confirmed
         self.deaths = deaths
 //        self.delta = delta
-//        self.deltaconfirmed = deltaconfirmed
-//        self.deltadeaths = deltadeaths
+        self.deltaconfirmed = deltaconfirmed
+        self.deltadeaths = deltadeaths
 //        self.deltarecovered = deltarecovered
         self.dateString = dateString
         self.recovered = recovered
@@ -137,28 +151,39 @@ class Statewise: Codable, Location {
 //}
 
 // MARK: - StateDatum
-class StateDatum: Codable {
-    let state: String
-    let districtData: [DistrictDatum]
+class INStateDatum: Codable {
+    let name: String
+    let districts: [INDistrict]
 
-    init(state: String, districtData: [DistrictDatum]) {
-        self.state = state
-        self.districtData = districtData
+    init(state: String, districtData: [INDistrict]) {
+        self.name = state
+        self.districts = districtData
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "state"
+        case districts = "districtData"
     }
 }
 
 // MARK: - DistrictDatum
-class DistrictDatum: Codable {
-    let district: String
+class INDistrict: Codable {
+    let name: String
     let confirmed: Int
-    let lastupdatedtime: String
+    let date: String
 //    let delta: Delta
 
     init(district: String, confirmed: Int, lastupdatedtime: String) {//, delta: Delta) {
-        self.district = district
+        self.name = district
         self.confirmed = confirmed
-        self.lastupdatedtime = lastupdatedtime
+        self.date = lastupdatedtime
 //        self.delta = delta
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "district"
+        case confirmed
+        case date = "lastupdatedtime"
     }
 }
 
@@ -171,4 +196,67 @@ class DistrictDatum: Codable {
 //    }
 //}
 
-typealias StateData = [StateDatum]
+//typealias INStateData = [INStateDatum]
+
+class IndiaStore {
+    
+    static var savedInDocs: India? {
+        return FileIO.shared.getOjbectFromFile(named: "india-store", withType: .json)
+    }
+    
+    static func save(_ data: India) {
+        FileIO.shared.save(data, to: "india-store", as: .json)
+    }
+    
+    static var loadedFromBundle: India {
+        return FileIO.shared.getBundledObject(inFile: "india_data", ofType: .json)!
+    }
+    
+    static var allData: India {
+        
+        let data = IndiaStore.savedInDocs ?? IndiaStore.loadedFromBundle
+        
+        if let home = data.states.first(where: { $0.code == "TT" }) {
+            home.name = "India"
+            india = home
+            if let updatedTime = home.dateString.toDate(fromFormat: .indiaDateFormat) {
+                Defaults.indiaUpdatedTime = updatedTime
+            }
+            
+        }
+
+        return data
+    }
+    
+    static var savedStatesInDocs: [INStateDatum]? {
+        return FileIO.shared.getOjbectFromFile(named: "india-district-store", withType: .json)
+    }
+    
+    static func saveStates(_ data: [INStateDatum]) {
+        FileIO.shared.save(data, to: "india-district-store", as: .json)
+    }
+    
+    static var loadedStatesFromBundle: [INStateDatum] {
+        return FileIO.shared.getBundledObject(inFile: "india_district", ofType: .json)!
+    }
+    
+    static var stateData: [INStateDatum] {
+        return savedStatesInDocs ?? loadedStatesFromBundle
+    }
+    
+    // TODO: update before release
+    static var india = INState(active: "4464", confirmed: "5247", deaths: "150",
+                               deltaconfirmed: "542", deltadeaths: "532",
+                               dateString: "07/04/2020 21:53:25", recovered: "433",
+                               name: "India", code: "TT")
+    
+    static var initialStates: [INState] {
+        return IndiaStore.allData.states.filter({ $0.code != "TT" })
+    }
+    
+    static func getDistricts(forState state: String) -> [INDistrict] {
+        stateData.first(where: { $0.name == state })?
+            .districts
+            .sorted(by: { $0.confirmed > $1.confirmed }) ?? []
+    }
+}

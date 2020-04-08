@@ -10,24 +10,74 @@ import Foundation
 import UIKit
 
 public struct Defaults {
-    @SDDefault("updatedTime", defaultValue: nil)
-    static var updatedTime: Date?
-}
-
-class Cache {
-    static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return formatter
-    }()
+    
+    @SDDefault("countriesUpdatedTime", defaultValue: nil)
+    static var countriesUpdatedTime: Date?
+    
+    @SDDefault("countriesUpdateInterval", defaultValue: 1799)
+    static var countriesUpdateInterval: Double
+    
+    @SDDefault("indiaUpdateInterval", defaultValue: 299)
+    static var indiaUpdateInterval: Double
+    
+    @SDDefault("indiaUpdatedTime", defaultValue: nil)
+    static var indiaUpdatedTime: Date?
 }
 
 extension String {
-    var date: Date? {
-        Cache.dateFormatter.date(from: self)
+    
+    static var jhuDateFormat: String { "yyyy-MM-dd'T'HH:mm:ssZ" }
+    
+    static var indiaDateFormat: String { "dd/MM/yyyy HH:mm:ss"}
+    
+    static var displayDateFormat: String { "MMMM d, h:mm a" }
+//    static var jhuDateFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat =
+//        return formatter
+//    }()
+//
+//    static var jhuDateFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+//        return formatter
+//    }()
+
+    internal func log(file: String = #file,
+                      functionName: String = #function,
+                      lineNumber: Int = #line) {
+        Console.shared.log("\(URL(fileURLWithPath: file).lastPathComponent)-\(functionName):\(lineNumber)  \(self)")
+    }
+    
+    func toDate(fromFormat format: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.date(from: self)
     }
     
     var number: Int { Int(self) ?? 0 }
+}
+
+extension Date {
+    func toString(inFormat format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+}
+extension Int {
+    var formatted: String {
+        if self < 1000 { return "\(self)" }
+        
+        let thousands = Double(self)/1000
+        
+        if thousands < 1000 {
+            return String(format: "%.1f", thousands) + " K"
+        }
+        
+        return String(format: "%.1f", thousands/1000) + " M"
+        
+    }
 }
 
 extension Array where Element: Hashable {
@@ -92,7 +142,7 @@ public class FileIO {
         }
         
         let object = try? decoder.decode(T.self, from: data)
-        print("\(filename).\(type.rawValue) is loaded from bundle")
+        Console.shared.log("\(filename).\(type.rawValue) is loaded from bundle")
         return object
     }
 //    public func getOjbectsFromFile<T: Codable>(named name: String, withType type: FileType) -> [T] {
