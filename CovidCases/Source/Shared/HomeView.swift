@@ -15,25 +15,59 @@ struct HomeView: View {
     @ObservedObject var device: Device = Device.shared
     
     var body: some View {
-        //        NavigationView {
+//        systemTabView
+        customTabView
+    }
+    
+    var systemTabView: some View {
         TabView {
-            NavigationView {
-                CountryList(data: countryData)
-                MaxLocationDetail(location: countryData.global)
-            }
+            countryList
                 .tabItem { Image(systemName: "globe") }
-            NavigationView {
-                INStatesList()
-                MaxLocationDetail(location: IndiaStore.india)
-            }
+            statesList
             .tabItem { Image(systemName: "mappin.and.ellipse") }
-            NavigationView {
-                Text("Info")
-            }
+            infoView
             .tabItem { Image(systemName: "info.circle") }
         }.edgesIgnoringSafeArea(.top).stacked(for: device)
-        //        }
-        
+    }
+    
+    var customTabView: some View {
+        UIKitTabView([
+            UIKitTabView.Tab(view: countryList, image: "globe"),
+            UIKitTabView.Tab(view: statesList, image: "mappin.and.ellipse"),
+            UIKitTabView.Tab(view: infoView, image: "info.circle")
+        ]).stacked(for: device)
+    }
+    
+    var countryList: some View {
+        NavigationView {
+            CountryList(data: countryData)
+            MaxLocationDetail(location: countryData.global)
+        }
+    }
+    
+    var statesList: some View {
+        NavigationView {
+            INStatesList()
+            MaxLocationDetail(location: IndiaStore.india)
+        }
+    }
+    
+    var infoView: some View {
+        NavigationView {
+            Text("Info")
+        }
+    }
+}
+
+struct NavView: View {
+    var body: some View {
+        NavigationView {
+            VStack {
+                NavigationLink(destination: Text("This page stays when you switch back and forth between tabs (as expected on iOS)")) {
+                    Text("Go to detail")
+                }
+            }
+        }
     }
 }
 
