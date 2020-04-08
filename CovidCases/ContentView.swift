@@ -12,7 +12,7 @@ import MINetworkKit
 struct ContentView: View {
     
     var body: some View {
-        HomeView()
+        HomeView().accentColor(.pink)
 //        CountryList()
 //        CountryDetail(country: Model.country)
 //        Text("India").onAppear(perform: updateStates)

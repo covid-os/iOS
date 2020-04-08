@@ -63,9 +63,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func globalConfig() {
+//        let buttonAppearance = UIBarButtonItemAppearance()
+//        buttonAppearance.configureWithDefault(for: .plain)
+//        buttonAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.navBarTitleColor]
+        
         let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()
         appearance.shadowColor = .clear
-        appearance.backgroundColor = .systemGroupedBackground
+        appearance.backgroundColor = .navBarColor
+//        appearance.titleTextAttributes = [.foregroundColor: UIColor.navBarTitleColor]
+//        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.navBarTitleColor]
+        
+//        appearance.backButtonAppearance = buttonAppearance
+//        appearance.buttonAppearance = buttonAppearance
+//        appearance.doneButtonAppearance = buttonAppearance
+        
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance

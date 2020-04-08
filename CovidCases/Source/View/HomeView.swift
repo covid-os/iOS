@@ -11,12 +11,14 @@ import SwiftUI
 struct HomeView: View {
     
     
+    @ObservedObject var device: Device = Device.shared
+    
     var body: some View {
 //        NavigationView {
             TabView {
                 NavigationView {
                     CountryList()
-                }
+                    }
                 
 //                .navigationBarTitle("COVID-19 Statistics", displayMode: .inline)
                     .tabItem { Image(systemName: "globe") }
@@ -28,7 +30,7 @@ struct HomeView: View {
                     Text("Info")
                 }
                     .tabItem { Image(systemName: "info.circle") }
-            }.edgesIgnoringSafeArea(.top)
+            }.edgesIgnoringSafeArea(.top).stacked(for: device)
 //        }
         
     }

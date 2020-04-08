@@ -8,7 +8,28 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
+extension View {
+    func stacked(for device: Device) -> some View {
+        if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
+            return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
+        } else {
+            return AnyView(self.navigationViewStyle(DoubleColumnNavigationViewStyle()))
+        }
+    }
+}
+
+extension Color {
+    static var navBarColor: Color { Color(UIColor.navBarColor) }
+    static var navBarTitleColor: Color { Color(UIColor.navBarTitleColor) }
+}
+
+extension UIColor {
+    static var navBarColor: UIColor { .secondarySystemGroupedBackground }
+//    static var navBarColor: UIColor { #colorLiteral(red: 0.7843137255, green: 0.3960784314, blue: 0.9058823529, alpha: 1) }
+    static var navBarTitleColor: UIColor { .white }
+}
 public struct Defaults {
     
     @SDDefault("countriesUpdatedTime", defaultValue: nil)

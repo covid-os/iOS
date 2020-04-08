@@ -11,9 +11,12 @@ import SwiftUI
 public struct SearchField: View {
     @Binding var searchText: String
     @State private var showCancelButton: Bool = false
-
-    public init(searchText: Binding<String>) {
+    var foregroundColor: Color = .primary
+    var backgroundColor: Color = Color(.secondarySystemBackground)
+    
+    public init(searchText: Binding<String>, backgroundColor: Color) {
         self._searchText = searchText
+        self.backgroundColor = backgroundColor
     }
     
     public var body: some View {
@@ -25,7 +28,7 @@ public struct SearchField: View {
                     self.showCancelButton = true
                 }, onCommit: {
                     Console.shared.log("onCommit")
-                }).foregroundColor(.primary)
+                }).foregroundColor(foregroundColor)
 
                 Button(action: {
                     self.searchText = ""
@@ -35,7 +38,7 @@ public struct SearchField: View {
             }
             .padding(EdgeInsets(top: .small, leading: .small * 0.75, bottom: .small, trailing: .small * 0.75))
             .foregroundColor(.secondary)
-            .background(Color(.secondarySystemGroupedBackground))
+            .background(backgroundColor)
             .cornerRadius(.small)
 
             if showCancelButton  {
@@ -44,7 +47,7 @@ public struct SearchField: View {
                         self.searchText = ""
                         self.showCancelButton = false
                 }
-                .foregroundColor(Color(.systemBlue))
+                .foregroundColor(Color.primary)
                 .animation(.easeInOut)
             }
         }

@@ -10,8 +10,6 @@ import SwiftUI
 
 struct LocationList<T: Location>: View {
     
-    @ObservedObject var device: Device = Device.shared
-    
     @Binding var home: T
     @Binding var searchText: String
     @Binding var displayedLocations: [T]
@@ -26,18 +24,18 @@ struct LocationList<T: Location>: View {
     var tempLocations: [T] { [home] + displayedLocations }
     
     var body: some View {
-        myView
-    }
-    
-    var myView: some View {
-        if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
-            return AnyView(navView.navigationViewStyle(StackNavigationViewStyle()))
-        } else {
-            return AnyView(navView.navigationViewStyle(DoubleColumnNavigationViewStyle()))
-        }
-    }
-    
-    var navView: some View {
+//        myView
+//    }
+//
+//    var myView: some View {
+//        if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
+//            return AnyView(navView.navigationViewStyle(StackNavigationViewStyle()))
+//        } else {
+//            return AnyView(navView.navigationViewStyle(DoubleColumnNavigationViewStyle()))
+//        }
+//    }
+//
+//    var navView: some View {
         //        NavigationView {
         viewStack
             .onAppear(perform: autoUpdateLocations)
@@ -53,10 +51,11 @@ struct LocationList<T: Location>: View {
         )
         
         return ZStack {
-            Color(UIColor.systemGroupedBackground)
+            Color.navBarColor
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                SearchField(searchText: binding).padding(.bottom, .small)
+                SearchField(searchText: binding, backgroundColor: Color(.systemGroupedBackground))
+                    .padding(.bottom, .small)
                 listView
             }
         }
@@ -197,7 +196,7 @@ struct LocationHeader<T: Location>: View {
         }, label: {
             Text(title)
                 .font(.custom("Gill Sans", size: .small * 1.5))
-                .foregroundColor(currentSorter == sorter ? .blue : .primary)
+                .foregroundColor(currentSorter == sorter ? .accentColor : .primary)
         })
         
     }
