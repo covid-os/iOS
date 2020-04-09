@@ -54,7 +54,7 @@ struct HomeView: View {
     
     var infoView: some View {
         NavigationView {
-            Text("Info")
+            InfoView()
         }
     }
 }

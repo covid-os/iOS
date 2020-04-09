@@ -32,6 +32,7 @@
 		A8ECCE1024388CC100DE57B5 /* covid_countries_data.json in Resources */ = {isa = PBXBuildFile; fileRef = A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */; };
 		A8F218FA243E155600D1C3A6 /* Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F218F9243E155600D1C3A6 /* Ext.swift */; };
 		A8F218FC243E1BBA00D1C3A6 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F218FB243E1BBA00D1C3A6 /* TabBar.swift */; };
+		A8F218FF243E2FAE00D1C3A6 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F218FE243E2FAE00D1C3A6 /* InfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		A8ECCE0F24388CC100DE57B5 /* covid_countries_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covid_countries_data.json; sourceTree = "<group>"; };
 		A8F218F9243E155600D1C3A6 /* Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ext.swift; sourceTree = "<group>"; };
 		A8F218FB243E1BBA00D1C3A6 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		A8F218FE243E2FAE00D1C3A6 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				A8A28345243CDAEE00B347CB /* Location */,
 				A8A28344243CDAE600B347CB /* India */,
 				A8A28343243CDADA00B347CB /* World */,
+				A8F218FD243E2F6800D1C3A6 /* Information */,
 				A85B78FA2436F25300AE9687 /* Shared */,
 			);
 			path = Source;
@@ -182,6 +185,14 @@
 				A85947E4243D6E74002D5976 /* LocationDetail.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		A8F218FD243E2F6800D1C3A6 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				A8F218FE243E2FAE00D1C3A6 /* InfoView.swift */,
+			);
+			path = Information;
 			sourceTree = "<group>";
 		};
 		E0DF1D4259BF56B3C4AF1B7A /* Pods */ = {
@@ -317,6 +328,7 @@
 				A85B78FC2436F27300AE9687 /* CountryModel.swift in Sources */,
 				A80712F12436FACF0068E6C5 /* CountryRequest.swift in Sources */,
 				A8F218FA243E155600D1C3A6 /* Ext.swift in Sources */,
+				A8F218FF243E2FAE00D1C3A6 /* InfoView.swift in Sources */,
 				A853A2B82436F105002FDC8E /* CountryList.swift in Sources */,
 				A853A2A32436F0CF002FDC8E /* AppDelegate.swift in Sources */,
 				A853A2A52436F0CF002FDC8E /* SceneDelegate.swift in Sources */,
