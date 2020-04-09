@@ -32,7 +32,7 @@ struct InfoView: View {
             ForEach(information, id: \.question) { info in
                 InfoSection(info: info)
             }
-            Section(footer: footer, content: { EmptyView() })
+//            Section(footer: footer, content: { EmptyView() })
         }
     }
     
@@ -56,7 +56,8 @@ struct InfoSection: View {
     
     var body: some View {
 //        questionInHeader
-        questionInList
+        questionInList.animation(.easeInOut)
+            //.transition(.slide)
     }
     
     var questionInHeader: some View {
@@ -71,9 +72,12 @@ struct InfoSection: View {
         Section {
             questionView
             if showsAnswer {
-                answersView//.animation(.easeInOut)
+                answersView
+                //.transition(.slide)//.animation(.easeInOut)
             }
-        }.animation(nil)
+        }
+        //.transition(.slide)
+            //.animation(nil)
             //.animation(.easeInOut)
         .listRowInsets(EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero))
     }
