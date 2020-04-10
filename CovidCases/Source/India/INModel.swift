@@ -171,30 +171,32 @@ class INDistrict: Codable {
     let name: String
     let confirmed: Int
     let date: String
-//    let delta: Delta
+    let delta: Delta
 
-    init(district: String, confirmed: Int, lastupdatedtime: String) {//, delta: Delta) {
+    init(district: String, confirmed: Int, lastupdatedtime: String, delta: Delta) {
         self.name = district
         self.confirmed = confirmed
         self.date = lastupdatedtime
-//        self.delta = delta
+        self.delta = delta
     }
     
     enum CodingKeys: String, CodingKey {
         case name = "district"
         case confirmed
         case date = "lastupdatedtime"
+        case delta
     }
+    
+    var recent: Int { delta.confirmed }
 }
 
-// MARK: - Delta
-//class Delta: Codable {
-//    let confirmed: Int
-//
-//    init(confirmed: Int) {
-//        self.confirmed = confirmed
-//    }
-//}
+class Delta: Codable {
+    let confirmed: Int
+
+    init(confirmed: Int) {
+        self.confirmed = confirmed
+    }
+}
 
 //typealias INStateData = [INStateDatum]
 

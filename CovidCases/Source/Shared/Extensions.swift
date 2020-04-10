@@ -27,6 +27,8 @@ extension View {
 extension Color {
     static var navBarColor: Color { Color(UIColor.navBarColor) }
     static var navBarTitleColor: Color { Color(UIColor.navBarTitleColor) }
+    
+    static var death: Color { .red }
 }
 
 extension UIColor {

@@ -45,7 +45,7 @@ struct InfoView: View {
             return AnyView(footer)
         }
         
-        return AnyView(InfoSection(info: info))
+        return AnyView(InfoRow(info: info))
     }
     private var footer: some View {
         InfoFooter(texts: ["App logo from CDC on Unspash", "Tweet to the developer @imthath_m", "Open sourced at github.com/covid-os/iOS"])
@@ -55,7 +55,7 @@ struct InfoView: View {
     }
 }
 
-struct InfoSection: View {
+struct InfoRow: View {
     
     let info: FAQ
     @State var showsAnswer = false

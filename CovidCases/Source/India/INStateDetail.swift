@@ -33,10 +33,10 @@ struct INStateDetail: View {
                         color: .green, percentage: state.recoveredPercent)
                 .listRowInsets(edgeInsets)
             ItemSection(title: "Total deaths", count: state.totalDeaths,
-                        color: .red, percentage: state.diedPercent)
+                        color: .death, percentage: state.diedPercent)
                 .listRowInsets(edgeInsets)
             ItemSection(title: "Recent deaths", count: state.recentDeaths,
-                        color: .red, percentage: state.recentDeathsPercent)
+                        color: .death, percentage: state.recentDeathsPercent)
                 .listRowInsets(edgeInsets)
             Section(header: footer.frame(height: .averageTouchSize * 2), content: { EmptyView() })
         }
@@ -102,6 +102,11 @@ struct INDistrictRow: View {
         HStack {
             Text(district.name)
             Spacer()
+            if district.recent > 0 {
+                Text("↑\(district.recent)")
+                    .font(.footnote)
+                    .foregroundColor(.red)
+            }
             Text("\(district.confirmed)")
         }
     }

@@ -28,9 +28,9 @@ struct MaxLocationDetail: View {
             ItemSection(title: "Recovered", count: location.recoveredCases,
                     color: .green, percentage: location.recoveredPercent)
             ItemSection(title: "Recent deaths", count: location.recentDeaths,
-                    color: .red, percentage: location.recentDeathsPercent)
+                    color: .death, percentage: location.recentDeathsPercent)
             ItemSection(title: "Total deaths", count: location.totalDeaths,
-                    color: .red, percentage: location.diedPercent)
+                    color: .death, percentage: location.diedPercent)
             Section(header: footer.frame(height: .averageTouchSize * CGFloat(totalFooterTexts.count)),
                     content: { EmptyView() })
         }
@@ -85,7 +85,7 @@ struct MinLocationDetail: View {
             ItemSection(title: "Recovered", count: location.recoveredCases,
                         color: .green, percentage: location.recoveredPercent)
             ItemSection(title: "Total deaths", count: location.totalDeaths,
-                        color: .red, percentage: location.diedPercent)
+                        color: .death, percentage: location.diedPercent)
             Section(header: footer.frame(height: .averageTouchSize * 4), content: { EmptyView() })
         }
         .listRowInsets(EdgeInsets(top: .medium, leading: .large, bottom: .medium, trailing: .large))
