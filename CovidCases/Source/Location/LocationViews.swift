@@ -24,24 +24,10 @@ struct LocationList<T: Location>: View {
     var tempLocations: [T] { [home] + displayedLocations }
     
     var body: some View {
-//        myView
-//    }
-//
-//    var myView: some View {
-//        if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
-//            return AnyView(navView.navigationViewStyle(StackNavigationViewStyle()))
-//        } else {
-//            return AnyView(navView.navigationViewStyle(DoubleColumnNavigationViewStyle()))
-//        }
-//    }
-//
-//    var navView: some View {
-        //        NavigationView {
         viewStack
             .onAppear(perform: autoUpdateLocations)
             .navigationBarItems(trailing: imageButton(withName: "arrow.2.circlepath.circle.fill",
                                                       andAction: updateLocations))
-        //        }
     }
     
     var viewStack: some View {
@@ -125,54 +111,9 @@ struct NoCaseView: View {
     }
 }
 
-// at this point (April 8 - implemented Countries list and Indian states list)
-// this view will be never used
-struct MinLocationDetail: View {
-    let location: Location
-    
-    var body: some View {
-        detailListView
-            .navigationBarTitle(location.name)
-    }
-    
-    fileprivate var detailListView: some View {
-        List {
-            Section(header: topHeader.frame(height: .averageTouchSize * 2), content: {
-                ItemRow(title: "Active cases", count: location.activeCases,
-                        color: .orange, percentage: location.activePercent)
-            })
-            ItemSection(title: "Recovered", count: location.recoveredCases,
-                        color: .green, percentage: location.recoveredPercent)
-            ItemSection(title: "Total Deaths", count: location.totalDeaths,
-                        color: .red, percentage: location.diedPercent)
-            Section(header: footer.frame(height: .averageTouchSize * 4), content: { EmptyView() })
-        }
-        .listRowInsets(EdgeInsets(top: .medium, leading: .large, bottom: .medium, trailing: .large))
-        .listStyle(GroupedListStyle())
-        .environment(\.horizontalSizeClass, .regular)
-    }
-    
-    private var topHeader: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                Text("Total cases - \(self.location.totalCases)")
-                    .frame(width: geometry.width)
-            }
-            .font(.title)
-            .foregroundColor(.primary)
-        }
-        
-    }
-    
-    private var footer: some View {
-        InfoFooter(texts: ["App logo from CDC on Unspash", "Tweet to the developer @imthath_m", "Open sourced at github.com/covid-os/iOS"])
-    }
-}
-
 struct LocationHeader<T: Location>: View {
     @Binding var currentSorter: LocationSorter
     @Binding var locations: [T]
-    //    var sortLocations: (LocationSorter) -> Void
     
     var body: some View {
         GeometryReader { geometry in

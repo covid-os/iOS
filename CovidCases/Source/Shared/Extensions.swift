@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import SwiftUI
 
+extension EdgeInsets {
+    static var zero: EdgeInsets { EdgeInsets(top: .zero, leading: .zero, bottom: .zero, trailing: .zero)}
+}
+
 extension View {
     func stacked(for device: Device) -> some View {
         if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {

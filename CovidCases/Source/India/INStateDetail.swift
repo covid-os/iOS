@@ -26,16 +26,16 @@ struct INStateDetail: View {
                         color: .orange, percentage: state.activePercent)
             })
                 .listRowInsets(edgeInsets)
-            ItemSection(title: "Reported today", count: state.recentCases,
+            ItemSection(title: "Recent cases", count: state.recentCases,
                         color: .orange, percentage: state.recentCasesPercent)
                 .listRowInsets(edgeInsets)
             ItemSection(title: "Recovered", count: state.recoveredCases,
                         color: .green, percentage: state.recoveredPercent)
                 .listRowInsets(edgeInsets)
-            ItemSection(title: "Total Deaths", count: state.totalDeaths,
+            ItemSection(title: "Total deaths", count: state.totalDeaths,
                         color: .red, percentage: state.diedPercent)
                 .listRowInsets(edgeInsets)
-            ItemSection(title: "Died today", count: state.recentDeaths,
+            ItemSection(title: "Recent deaths", count: state.recentDeaths,
                         color: .red, percentage: state.recentDeathsPercent)
                 .listRowInsets(edgeInsets)
             Section(header: footer.frame(height: .averageTouchSize * 2), content: { EmptyView() })

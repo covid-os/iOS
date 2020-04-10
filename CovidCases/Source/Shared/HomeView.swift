@@ -16,19 +16,19 @@ struct HomeView: View {
     
     var body: some View {
 //        systemTabView
-        customTabView
+        customTabView.accentColor(.pink)
     }
     
-    var systemTabView: some View {
-        TabView {
-            countryList
-                .tabItem { Image(systemName: "globe") }
-            statesList
-            .tabItem { Image(systemName: "mappin.and.ellipse") }
-            infoView
-            .tabItem { Image(systemName: "info.circle") }
-        }.edgesIgnoringSafeArea(.top).stacked(for: device)
-    }
+//    var systemTabView: some View {
+//        TabView {
+//            countryList
+//                .tabItem { Image(systemName: "globe") }
+//            statesList
+//            .tabItem { Image(systemName: "mappin.and.ellipse") }
+//            infoView
+//            .tabItem { Image(systemName: "info.circle") }
+//        }.edgesIgnoringSafeArea(.top).stacked(for: device)
+//    }
     
     var customTabView: some View {
         UIKitTabView([
