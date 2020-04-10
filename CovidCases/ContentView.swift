@@ -13,16 +13,6 @@ struct ContentView: View {
     
     var body: some View {
         HomeView()
-//        NavigationView {
-//            InfoView()
-//        }
-//
-        
-//                SampleView()
-//            .accentColor(.pink)
-//        CountryList()
-//        CountryDetail(country: Model.country)
-//        Text("India").onAppear(perform: updateStates)
     }
 }
 
