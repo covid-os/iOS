@@ -41,14 +41,25 @@ struct HomeView: View {
     var countryList: some View {
         NavigationView {
             CountryList(data: countryData)
-            MaxLocationDetail(location: countryData.global)
+            VStack {
+                Text("COVID-19 Statistics - World").font(.largeTitle)
+                MaxLocationDetail(location: countryData.global)
+                Text("Swipe right from the left edge to see the list of locations")
+                    .font(.footnote).foregroundColor(.secondary).padding(.bottom, .small)
+            }
+            
         }
     }
     
     var statesList: some View {
         NavigationView {
             INStatesList()
-            MaxLocationDetail(location: IndiaStore.india)
+            VStack {
+                Text("COVID-19 Statistics - India").font(.largeTitle)
+                MaxLocationDetail(location: IndiaStore.india)
+                Text("Swipe right from the left edge to see the list of states")
+                    .font(.footnote).foregroundColor(.secondary).padding(.bottom, .small)
+            }
         }
     }
     

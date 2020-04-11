@@ -110,13 +110,13 @@ struct InfoRow: View {
     }
     
     var questionButton: some View {
-        Button(action: {
-            self.showsAnswer.toggle()
-        }, label: {
+//        Button(action: {
+//            self.showsAnswer.toggle()
+//        }, label: {
             QuestionView(question: info.question)
                 .background(showsAnswer ? Color.init("backgroundPink") : Color.clear)
                 .animation(.default)
-            }).buttonStyle(NoAnimationButtonStyle())
+//            }).buttonStyle(NoAnimationButtonStyle())
     }
     
     
@@ -159,10 +159,10 @@ struct InfoView_Previews: PreviewProvider {
     }
 }
 
-struct NoAnimationButtonStyle: ButtonStyle {
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-    }
-    
-}
+//struct NoAnimationButtonStyle: ButtonStyle {
+//
+//    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+//    }
+//
+//}

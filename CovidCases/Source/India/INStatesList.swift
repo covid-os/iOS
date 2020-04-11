@@ -14,13 +14,13 @@ struct INStatesList: View {
     @State private var storedCountries: [INState] = IndiaStore.allData.exceptTotal
     @State private var searchText: String = ""
     @State private var sortedBy: LocationSorter = .total
-    @State var world: INState = IndiaStore.india
+    @State var home: INState = IndiaStore.india
     
     let getDistricts = GetObject<[INStateDatum]>()
     let getStates = GetObject<India>()
     
     var body: some View {
-        LocationList(home: $world, searchText: $searchText,
+        LocationList(home: $home, searchText: $searchText,
                      displayedLocations: $displayedCountries, sortedBy: $sortedBy,
                      updateInterval: Defaults.indiaUpdateInterval,
                      updateLocations: updateStates, filterLocations: filterStates)
@@ -35,6 +35,8 @@ struct INStatesList: View {
                 Console.shared.log("API requst success")
                 
                 let updateTime = data.updateTime
+                self.home = data.total
+                IndiaStore.india = self.home
                 guard updateTime != Defaults.indiaUpdatedTime else { return }
                 Defaults.indiaUpdatedTime = updateTime
                 

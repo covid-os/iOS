@@ -16,7 +16,7 @@ extension EdgeInsets {
 
 extension View {
     func stacked(for device: Device) -> some View {
-        if device.orientation == .portrait || UIDevice.current.userInterfaceIdiom == .phone {
+        if UIDevice.current.userInterfaceIdiom == .phone {
             return AnyView(self.navigationViewStyle(StackNavigationViewStyle()))
         } else {
             return AnyView(self.navigationViewStyle(DoubleColumnNavigationViewStyle()))

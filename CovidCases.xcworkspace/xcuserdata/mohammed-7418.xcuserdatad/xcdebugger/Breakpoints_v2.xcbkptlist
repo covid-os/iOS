@@ -7,38 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6D109D86-515C-48CA-AD97-9D47219EB871"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/India/INModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "INState"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1C5671BB-6EB2-45EA-951D-614384C1F84E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CovidCases/Source/India/INModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "INState"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F45E075A-39FC-41A5-A627-B8191060ABA6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -66,6 +34,198 @@
             endingLineNumber = "19"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BEC72C4E-B0B5-4227-99F7-0288BBF6C684"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "432E2B0C-EBA6-45C7-AC65-B663E688B0C2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91E8FA74-9389-4565-8A45-06CFD0EF5EF9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C4F70C2F-F063-4FC3-BA02-0F7DE6A7FDC8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C4F70C2F-F063-4FC3-BA02-0F7DE6A7FDC8 - 3723a1dd8efba1f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "372">
+               </Location>
+               <Location
+                  uuid = "C4F70C2F-F063-4FC3-BA02-0F7DE6A7FDC8 - 3723a1dd8efba1f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "642F61CB-B6DE-4836-B576-90411749E515"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "642F61CB-B6DE-4836-B576-90411749E515 - f2e7dcad759fe125"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "642F61CB-B6DE-4836-B576-90411749E515 - 3723a1dd8efba1f2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;COVID_Stats.India, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "372">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9DD335F-37AD-4EB7-9971-6B44CC44BF49"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CovidCases/Source/India/INStatesList.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "updateStates()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B9DD335F-37AD-4EB7-9971-6B44CC44BF49 - f2e7dcad759fe125"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "489">
+               </Location>
+               <Location
+                  uuid = "B9DD335F-37AD-4EB7-9971-6B44CC44BF49 - aea3893da5bcf42c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Result&lt;Swift.Array&lt;COVID_Stats.INStateDatum&gt;, MINetworkKit.MINetworkError&gt;) -&gt; () in COVID_Stats.INStatesList.updateStates() -&gt; ()"
+                  moduleName = "COVID Stats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mohammed-7418/Desktop/Apps/iOS_Apps/CovidCases/CovidCases/Source/India/INStatesList.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "195">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
