@@ -49,8 +49,13 @@ struct InfoView: View {
     ]
     
     var body: some View {
-        faqList
-            .navigationBarTitle("Know about COVID-19", displayMode: .inline)
+        VStack {
+            Card(cornerRadius: .zero, fillColor: Color(.systemBackground)) {
+                Text("Know about COVID-19").font(.headline)
+            }.frame(height: .averageTouchSize)
+            faqList
+        }
+//            .navigationBarTitle("Know about COVID-19", displayMode: .inline)
     }
     
     var faqList: some View {

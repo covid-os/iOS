@@ -29,7 +29,7 @@ struct CountryList: View {
         LocationList(home: $world, searchText: $searchText,
                      displayedLocations: $displayedCountries, sortedBy: $sortedBy,
                      updateLocations: updateCountries, filterLocations: filterCountries)
-                     .navigationBarTitle("COVID-19 Global Statistics", displayMode: .inline)
+                     .navigationBarTitle("COVID-19 Statistics - Worldwide", displayMode: .inline)
     }
     
     func updateCountries() {

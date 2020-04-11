@@ -24,7 +24,7 @@ struct INStatesList: View {
                      displayedLocations: $displayedCountries, sortedBy: $sortedBy,
                      updateInterval: Defaults.indiaUpdateInterval,
                      updateLocations: updateStates, filterLocations: filterStates)
-                     .navigationBarTitle("COVID-19 Indian Statistics", displayMode: .inline)
+                     .navigationBarTitle("COVID-19 Statistics - India", displayMode: .inline)
     }
     
     func updateStates() {
@@ -47,7 +47,12 @@ struct INStatesList: View {
         }
         
         getDistricts.execute(INRequest.district) { result in
-            
+            switch result {
+            case .success(let states):
+                IndiaStore.saveStates(states)
+            case .failure(let error):
+                "\(error)".log()
+            }
         }
     }
     

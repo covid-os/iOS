@@ -53,9 +53,10 @@ struct HomeView: View {
     }
     
     var infoView: some View {
-        NavigationView {
+//        NavigationView {
             InfoView()
-        }
+//            Text("Stay Home. \nStay Safe. \nStay Healthy.").font(.title)
+//        }
     }
 }
 
